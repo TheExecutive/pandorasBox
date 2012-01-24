@@ -1,0 +1,1211 @@
+/* ---------------------------------------=Begin Reset
+----------------------------------------------------*/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0b1 | 201101 
+   NOTE: WORK IN PROGRESS
+   USE WITH CAUTION AND TEST WITH ABANDON */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define visible focus styles! 
+:focus {
+	outline: ?????;
+} */
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* -----------------------------------------=End Reset
+----------------------------------------------------*/
+
+/* -----------------------------------------=Clearfix-----*/
+
+/* For modern browsers */
+.clearfix:before, .clearfix:after {
+    content:"";
+    display:table;
+}
+
+.clearfix:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+    zoom:1;
+}
+
+/* -----------------------------------------=Custom Fonts-----*/
+
+@font-face {
+    font-family: 'BauhausMedium';
+    src: url('../fonts/bauhaus-medium-webfont.eot');
+    src: url('../fonts/bauhaus-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bauhaus-medium-webfont.woff') format('woff'),
+         url('../fonts/bauhaus-medium-webfont.ttf') format('truetype'),
+         url('../fonts/bauhaus-medium-webfont.svg#BauhausMedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/* -----------------------------------------=Html/Body-----*/
+
+html {
+	font-size: 45%; /* apparently 62.5 doesn't match what I want*/
+}
+
+body {
+	font: 1em 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+strong {
+	font-weight: bold;
+}
+
+/* -----------------------------------------=Universal-----*/
+
+.highlight {
+	color: #ee9f23;
+}
+
+/* -----------------------------------------=Upper Third-----*/
+#wrapper {
+	border-top: 8px solid #000000;
+}
+
+#upperThirdWrapper {
+	position: relative;
+	z-index: 1; /*relative position and z-index so that the shadow can be on top of the middle strip*/
+	/*background: #450049 url("../img/upperbg.jpg") top no-repeat;*/
+	 -webkit-box-shadow: 0px 6px 6px #29032d; 
+     -moz-box-shadow: 0px 6px 6px #29032d; 
+          box-shadow: 0px 6px 6px #29032d; 
+background: #7f0081;
+background: -moz-radial-gradient(center, ellipse cover, #7f0081 0%, #440048 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#7f0081), color-stop(100%,#440048));
+background: -webkit-radial-gradient(center, ellipse cover, #7f0081 0%,#440048 100%);
+background: -o-radial-gradient(center, ellipse cover, #7f0081 0%,#440048 100%);
+background: -ms-radial-gradient(center, ellipse cover, #7f0081 0%,#440048 100%);
+background: radial-gradient(center, ellipse cover, #7f0081 0%,#440048 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7f0081', endColorstr='#440048',GradientType=1 );
+}
+
+#headerWrapper{
+	border-top: 2px solid #630182;
+}
+
+#header{
+	overflow: hidden;
+	width: 960px;
+	height: 136px;
+	margin: 0 auto;
+	background: url("../img/headerlinelogo.png") top center no-repeat;
+}
+
+#header h1 {
+	text-shadow: #000 1px 1px 1px;
+	display: block;
+	height: 66px;
+	width: 260px;
+	border: 1px solid blue;
+}
+
+/* -----------------------------------------=Logo-----*/
+
+.logopandora {
+	font: 500 4.8em "Helvetica Neue", Helvetica, sans-serif;
+	letter-spacing: -1px;
+	color: #D3D3D3
+}
+
+.logobox {
+	color: #FFB55F;
+	font: 6.4em "BauhausMedium", "Arial Black", sans-serif;
+}
+
+/* -----------------------------------------=Login Link-----*/
+
+#loginLink {
+	display: block;
+	margin: 36px 0 0 790px;
+	text-decoration: none;
+	background: url("../img/spritespandora.png") top center no-repeat;
+	background-position: -51px -88px;
+	width: 82px;
+	height: 26px;
+	padding: 6px 0 0 0;
+	text-transform: lowercase;
+	color: #fff;
+	font: 2.4em "Arial Black", Arial, sans-serif;
+}
+
+#loginLink:hover {
+	color: #ffb171;
+}
+
+/* -----------------------------------------=Account Link-----*/
+
+#accountLink {
+	display: block;
+	margin: 36px 0 0 790px;
+	text-decoration: none;
+	width: 82px;
+	height: 26px;
+	padding: 6px 0 0 0;
+	text-transform: lowercase;
+	color: #fff;
+	font: 2.4em "Arial Black", Arial, sans-serif;
+}
+
+#accountLink:hover {
+	color: #ffb171;
+}
+
+
+/* -------------------------------------------Login Panel --*/
+
+#panelContainer {
+	position: relative;
+	width: 960px;
+	margin: 0 auto; /*I want the loginpanel to stick 
+	to the nav so I am making the container match the nav's
+	settings, basically it's another nav bar that has no height*/
+}
+
+#loginPanel {
+	width: 250px;
+	height: 224px;
+	position: absolute;
+	z-index: 3;
+	background-color: rgba(0,0,0,0.8);
+	border: 8px solid rgba(0,0, 0,0.6);
+	background-clip: padding-box; /*clips the box by the padding so that the background can show through the border*/
+	top: 76px;
+	right: 70px;
+}
+
+#loginPanel form {
+	padding: 20px 34px;
+}
+
+#loginPanel label {
+	display: block;
+	color: #fff;
+	font: bold 2.2em 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	text-transform: lowercase;
+	padding: 5px 0;
+}
+
+#loginPanel .loginForm {
+	width: 162px;
+	height: 28px;
+	border: 0;
+	padding: 0 15px;
+	font: bold 2.2em 'Helvetica Neue', Helvetica, sans-serif;
+	color: #333;
+	box-shadow:inset 1px 1px 2px #9aaabe;
+}
+
+#loginPanel form fieldset a {
+	display: block;
+	font-size: 1.8em;
+	text-align: right;
+	color: #ffb171;
+}
+
+.signInButton, .saveButton {
+	display: block;
+	font: bold 2.1em 'Helveticia Neue', Arial, Helvetica, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	text-transform: lowercase;
+	border: 0;
+	background-color: #ffb171;
+	width: 80px;
+	height: 30px;
+	margin-top: 20px;
+	letter-spacing: 1px;
+}
+
+.signInButton:hover, .saveButton:hover {
+	background: -moz-linear-gradient(
+		top,
+		#fffcb9 0%,
+		#f7b954);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#fffcb9),
+		to(#f7b954));
+}
+
+.signInButton:active, .saveButton:active {
+	background: -moz-linear-gradient(
+		top,
+		#f5a527 0%,
+		#fffca9);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#f5a527),
+		to(#fffca9));
+}
+
+.cancelLink {
+	display: block;
+	text-transform: lowercase;
+	float: right;
+	font-size: 1.8em;
+	color: #eee;
+	margin-top: 30px;
+}
+
+/* -----------------------------------------=Error Tooltip-----*/
+
+.errorTooltip {
+	position:absolute; 
+	top: 140px; 
+	left:380px;
+	z-index: 10;
+}
+
+.errorTooltip-body {
+	position:relative; 
+	width: 240px; 
+	height: 30px; 
+	background: #76290e;
+	-moz-box-shadow: 1px 1px 2px #222;
+	text-align: right;
+	color: #fff;
+	font: 1.7em/12px "Helvetica Neue", Helvetica, sans-serif;
+	text-shadow: 1px 2px 0px #000;
+	padding: 6px 8px 0 0;
+	z-index: 10;
+}
+
+.errorTooltip-tip {
+	position:absolute; 
+	bottom: 4px; 
+	right: -24px;
+	width: 0px; 
+	height: 1px;
+	border: 12px solid transparent;
+	z-index: 10;
+	border-left: 12px solid #76290e;
+	z-index: 11;
+}
+
+/* -----------------------------------------=SearchBox-----*/
+
+#searchWrapper {
+	width: 273px;
+	height: 32px;
+	margin: 20px auto 0 auto;
+	position: relative;
+}
+
+#searchWrapper input {
+	position: absolute;
+	z-index: 1;
+	font: bold 2.4em "Helvetica Neue", Helvetica, sans-serif;
+	color: #9d9d9d;
+	border: 0;
+	padding: 0 20px;
+	width: 183px;
+	height: 32px;
+  -webkit-border-radius: 15px; 
+     -moz-border-radius: 15px; 
+          border-radius: 15px;
+  -webkit-box-shadow: inset 1px 1px 2px #000;
+     -moz-box-shadow: inset 1px 1px 2px #000;
+          box-shadow: inset 1px 1px 2px #000; 
+}
+
+#searchWrapper button {
+	position: absolute;
+	background: url("../img/spritespandora.png") no-repeat;
+	background-position: 16px -84px;
+	right: 0;
+	z-index: 0;
+	border: 0;
+	text-indent: -9999px;
+	width: 76px;
+	height: 32px;
+	background-color: #ffa358;
+	-webkit-border-radius: 15px; 
+     -moz-border-radius: 15px; 
+          border-radius: 15px;
+  -webkit-box-shadow: inset 1px 1px 2px #000;
+     -moz-box-shadow: inset 1px 1px 2px #000;
+          box-shadow: inset 1px 1px 2px #000; 
+}
+
+#searchWrapper button:hover {
+	background-color: #ffb171;
+}
+
+/* -----------------------------------------=Upper Third Content-----*/
+
+#upperThirdContent {
+	width: 960px;
+	margin: 60px auto 50px;
+}
+
+/* -----------------------------------------=Typography-----*/
+
+#typography {
+	float: right;
+	position: relative;
+	width: 579px;
+	height: 286px;
+}
+
+.tpgraphic {
+	position: absolute;
+	text-indent: -9999px;
+	display: block;
+	background: url("../img/spritespandora.png") no-repeat;
+	background-position: -310px -412px;
+	width: 250px;
+	height: 268px;
+	top: -10px;
+	left: 200px;
+}
+
+.tpsmall {
+	position: absolute;
+	text-transform: lowercase;
+	font: 2.85em "Helvetica Neue", Helvetica, sans-serif;
+	color: #fff;
+	top: 20px;
+	left: 20px;
+	text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+}
+
+.tpthincaps {
+	position: absolute;
+	text-transform: uppercase;
+	font: 4.573em "Helvetica Neue", Helvetica, sans-serif;
+	font-weight: lighter;
+	color: #c7c7c7;
+	letter-spacing: 25px;
+	top: 46px;
+	left: 60px;
+}
+
+.tpcolorcaps {
+	position: absolute;
+	text-transform: uppercase;
+	font: 4.573em "Helvetica Neue", Helvetica, sans-serif;
+	color: #ffa358;
+	letter-spacing: 2px;
+	top: 78px;
+	left: 60px;
+	text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+}
+
+.tpdarksmall {
+	position: absolute;
+	text-transform: lowercase;
+	font: 4.573em "Helvetica Neue", Helvetica, sans-serif;
+	font-weight: bold;
+	color: #2b2b2b;
+	top: 110px;
+	left: 317px;
+	
+}
+
+.tpbig {
+	position: absolute;
+	text-transform: lowercase;
+	font: 12.53em "Helvetica Neue", Helvetica, sans-serif;
+	font-weight: bold;
+	color: #e6e5e5;
+	top: 130px;
+	left: 162px;
+	text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+}
+
+.tpperiod {
+	color: #ffa358;
+}
+
+.tpasterisk {
+	position: absolute;
+	color: #dcd4db;
+	font: 9.46em "Times New Roman", Times, serif;
+	top: 130px;
+	right: 58px;
+	/*text-shadow: rgba(0,0,0,1) 2px 2px 2px;*/
+	text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+}
+
+.tpcomment {
+	position: absolute;
+	font: 1.73em "Times New Roman", Times, serif;
+	color: #dcd4db;
+	bottom: 46px;
+	right: 33px;
+	
+}
+
+/* -----------------------------------------=Latest Activity Wrapper-----*/
+
+#latestActivityWrapper {
+	width: 340px;
+	margin-left: 10px;
+}
+
+#latestActivityWrapper h3 {
+	text-transform: uppercase;
+	font: 2.4em "Arial Black", Arial, sans-serif;
+	color: #c6c6c6;
+	text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+	
+}
+
+.latestActivityPanel {
+	height: 206px;
+	width: 300px;
+	padding: 20px;
+	background: #392b3a url("../img/spritespandora.png") no-repeat;
+	background-position: 90px -370px;
+	-webkit-border-radius: 10px; 
+     -moz-border-radius: 10px; 
+          border-radius: 10px;
+          -webkit-box-shadow: 1px 1px 2px #000;
+     -moz-box-shadow: 1px 1px 2px #000;
+          box-shadow: 1px 1px 2px #000; 
+}
+
+.activityEntry p {
+	color: #e0e0e0;
+	font: 1.86em/1.7 "Helvetica Neue", Helvetica, sans-serif;
+	letter-spacing: .4px;
+}
+
+.actTitle {
+	font-weight: bold;
+	color: #ff790c;
+}
+
+.actTitle:hover {
+	color: #ffb171;
+}
+
+/* -----------------------------------------=Account Panels and Title----*/
+
+#upperThirdContent .accountTitle {
+	color: #fff;
+	text-align: right;
+	text-transform: lowercase;
+	font: bold 5.33em 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#accountSidePanel, #accountMainPanel, #achievementPanel {
+	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	background-color: #392B3A;
+	-webkit-border-radius: 10px; 
+     -moz-border-radius: 10px; 
+     border-radius: 10px;
+     -webkit-box-shadow: 1px 1px 2px #000;
+     -moz-box-shadow: 1px 1px 2px #000;
+          box-shadow: 1px 1px 2px #000;
+}
+
+#accountMainPanel {
+	width: 640px;
+	height: 332px;
+	margin-left: 10px;
+	overflow: hidden;
+}
+
+#accountSidePanel {
+	width: 280px;
+	height: 100px;
+	margin-right: 10px;
+	float: right;
+}
+
+#achievementPanel {
+	width: 940px;
+	height: 230px;
+	margin: 20px auto;
+	position: relative;
+	overflow: hidden;
+	
+}
+
+#accountSidePanel ul {
+	width: 200px;
+	margin: 20px;
+}
+
+#accountSidePanel ul li {
+	list-style-type: none;
+	font-size: 2.4em;
+	text-align: right;
+	text-transform: lowercase;
+}
+
+#accountSidePanel ul li a {
+	color: #FFB55F;
+}
+
+#rankAndExperienceInfo {
+	width: 240px;
+	height: 220px;
+	float: right;
+	margin: 54px 10px;
+	border-left: 1px solid white;
+}
+
+#rankAndExperienceInfo p {
+	text-align: left;
+	text-transform: lowercase;
+	color: #fff;
+	margin-left: 10px;
+}
+
+#rankAndExperienceInfo .rankTitle {
+	font-size: 3em;
+	font-weight: bold;
+}
+
+#rankAndExperienceInfo .rankDescrip {
+	text-transform: none;
+	font-style: italic;
+	font-size: 1.8em;
+}
+
+#rankAndExperienceInfo p .rankName {
+	font-size: 1.66em;
+	color: #FFB55F;
+}
+
+#rankAndExperienceInfo p .rankNumberMed {
+	color: #FFB55F;
+	font-weight: bold;
+}
+
+#rankAndExperienceInfo .rankTitleSecondary {
+	font-size: 2.6em;
+	
+}
+
+/* -----------------------------------------=Account Main Panel----*/
+
+#accountMainInfo {
+	width: 340px;
+	overflow: hidden;
+	margin: 20px;
+	color: #fff;
+}
+
+#accountAvatarPhoto {
+	width: 100px;
+	height: 100px;
+	margin: 0 10px 10px 0;
+	float: left;
+	border: 1px solid blue;
+}
+
+.accountName {
+	font-size: 3em;
+	margin-top: 69px;
+	font-weight: bold;
+}
+
+.accountDescrip {
+	clear: left;
+	font-size: 1.8em;
+}
+
+/* -----------------------------------------=Achievements----*/
+
+#achievementPanel h3 {
+	font-size: 4.3em;
+	font-weight: bold;
+	text-transform: lowercase;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #fff;
+}
+
+#achievementGrid {
+	width: 760px;
+	height: 88px;
+	margin: 50px auto 0;
+}
+
+#achievementGrid li {
+	float: left;
+	margin: 10px;
+	width: 71px;
+	height: 71px;
+	border: 2px solid #000;
+	background-color: #000;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: 2px 2px 2px #29032D;
+     -moz-box-shadow: 2px 2px 2px #29032D;
+          box-shadow: 2px 2px 2px #29032D;
+	
+}
+
+#achievementGrid li:hover {
+	border: 2px solid #F7B954;
+}
+
+#achievementPanel h4 {
+	font-size: 3.6em;
+	text-align: center;
+	width: 820px;
+	margin: 0 auto;
+	color: #C2C2C2;
+}
+
+.achievementDescrip {
+	width: 760px;
+	margin: 0 auto;
+	text-align: center;
+	color: #fff;
+	font-style: italic;
+	font-size: 2.4em;
+}
+
+/* -----------------------------------------=Control Bar-----*/
+
+#upperThirdContent .controlBarHeader {
+	color: #fff;
+	text-align: right;
+	text-transform: lowercase;
+	width: 930px;
+	padding: 5px;
+	margin: 0 auto;
+	font: bold 2.33em 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#controlBar {
+	overflow: hidden;
+	color: #fff;
+	width: 930px;
+	height: 36px;
+	margin: 0 auto;
+	background-color: rgba(0,0,0,0.6);
+	border: 5px solid rgba(0,0, 0,0.4);
+	background-clip: padding-box; /*clips the box by the padding so that the background can show through the border*/
+}
+
+#controlBar .loggedInAs {
+	float: left;
+	padding: 4px 2px 2px 10px;
+	font-size: 2.4em;
+}
+
+#controlBar ul {
+	min-width: 230px;
+	margin: 0 0 0 660px;
+	height: 30px;
+}
+
+#controlBar ul li {
+	float: left;
+}
+
+#controlBar .loggedSmaller {
+	font-size: 0.8em;
+}
+
+#searchResultsWrapper, #latestActivityWrapperMain {
+	width: 940px;
+	margin: 10px 0 0 10px;
+}
+
+#searchResultsWrapper h3, #latestActivityWrapperMain h3 {
+	text-transform: uppercase;
+	font: 2.4em "Arial Black", Arial, sans-serif;
+	color: #c6c6c6;
+	text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+	
+}
+
+.searchResultsPanel, .latestActivityPanelMain {
+	min-height: 100px;
+	width: 900px;
+	padding: 20px;
+	background-color: #392b3a;
+	-webkit-border-radius: 10px; 
+     -moz-border-radius: 10px; 
+          border-radius: 10px;
+          -webkit-box-shadow: 1px 1px 2px #000;
+     -moz-box-shadow: 1px 1px 2px #000;
+          box-shadow: 1px 1px 2px #000; 
+}
+
+.searchResult p, .latestActivityPanelMain p {
+	color: #e0e0e0;
+	font: 1.86em/1.7 "Helvetica Neue", Helvetica, sans-serif;
+	letter-spacing: .4px;
+}
+
+.resultTitle, .actTitleMain {
+	font-weight: bold;
+	color: #ff790c;
+}
+
+.resultTitle:hover, .actTitleMain:hover {
+	color: #ffb171;
+}
+
+/*------------------------------------------=Comment Area -------------*/
+
+#commentAreaWrapper {
+	width: 930px;
+	min-height: 290px;
+	margin: 10px auto;
+	padding: 10px 0 0 10px;
+}
+
+#postCommentForm form {
+	width: 720px;
+	padding: 10px 0;
+	height: 100px;
+}
+
+#postCommentForm h3 {
+	color: #5d5c5c;
+	min-width: 300px;
+	text-transform: lowercase;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #c2c2c2;
+	font: bold 4em/0.9 "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.commentTitleSmaller {
+	font-size: .8em;
+}
+
+.nameOfThread {
+	color: #0000FF;
+}
+
+#comment_post {
+	display: block;
+	height: 100px;
+	max-height: 200px;
+	width: 680px;
+	min-width: 300px;
+	min-height: 80px;
+	max-width: 680px;
+	border: 1px solid black;
+}
+
+#commentArea {
+	margin: 30px 0 0 0;
+	min-height: 140px;
+}
+
+.commentAreaPost {
+	margin: 20px 0;
+	-webkit-box-shadow: 1px 1px 2px #000;
+     -moz-box-shadow: 1px 1px 2px #000;
+          box-shadow: 1px 1px 2px #000; 
+
+}
+
+.commentAreaPost h4 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #ffffff;
+	height: 15px;
+	padding: 10px;
+	background: -moz-linear-gradient(
+		top,
+		#6b6b6b 0%,
+		#000000);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#6b6b6b),
+		to(#000000));
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border: 1px solid #000000;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.4),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
+.commentProfilePic {
+	width: 50px;
+	height: 50px;
+	background-color: #222;
+	border: 2px solid #FFA358;
+	float: left;
+	margin: 10px;
+		-webkit-box-shadow: 1px 1px 1px #000;
+     -moz-box-shadow: 1px 1px 1px #000;
+          box-shadow: 1px 1px 1px #000; 
+}
+
+.posterName {
+	font-weight: bold;
+}
+
+.postedDate {
+	display: block;
+	margin-top: -16px;
+	text-align: right;
+}
+
+.commentAreaPost p {
+	padding: 20px;
+	font-size: 2em;
+	background-color: #eee;
+}
+
+/* -----------------------------------------=Big Ass Signup Panel-----*/
+
+#bigAssSignupPanel {
+	height: 516px;
+	margin-top: -516px;
+	background: #000 url("../img/signupbg.jpg") center center no-repeat;
+	/*background-position: 0px 0px;*/
+}
+
+#signupPanelInner {
+	width: 960px;
+	height: 516px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+}
+
+#bigAssSignupPanel h2 {
+	position: absolute;
+	color: #ddd;
+	width: 940px;
+	text-align: right;
+	text-transform: lowercase;
+	padding-bottom: 3px;
+	font: bold 5.33em/0.9 "Helvetica Neue", Helvetica, sans-serif;
+	bottom: 30px;
+	right: 10px;
+	border-bottom: 1px solid #222;
+	text-shadow: 1px 1px 2px #000;
+	width: 500px;
+}
+
+.easier {
+	color: #ffb171;
+}
+
+#innerHeaderLogo {
+	text-indent: -9999px;
+	width: 960px;
+	height: 80px;
+	margin: 10px auto 0 auto;
+	background: url("../img/headerlinelogo.png") top center no-repeat;
+}
+
+#signUpFormPanel {
+	width: 400px;
+	height: 330px;
+	margin: 20px 0 0 0;
+	background-color: rgba(0,0,0,0.6);
+	border: 8px solid rgba(0,0, 0,0.4);
+	background-clip: padding-box; /*clips the box by the padding so that the background can show through the border*/
+	border-radius: 10px;
+}
+
+.requiredNotice {
+	float: right;
+	margin: 10px;
+	color: #fff;
+	font: italic 1.6em 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#signUpFormPanel form {
+	padding: 20px 34px;
+	width: 332px;
+}
+
+#signUpFormPanel label {
+	display: block;
+	color: #fff;
+	font: bold 2.2em 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	text-transform: lowercase;
+	padding: 5px 0;
+}
+
+#signUpFormPanel .signupForm {
+	width: 306px;
+	height: 28px;
+	border: 0;
+	padding: 0 15px;
+	font: bold 2.2em 'Helvetica Neue', Helvetica, sans-serif;
+	color: #333;
+	box-shadow:inset 1px 1px 2px #9aaabe;
+}
+
+#signUpFormPanel form fieldset a {
+	display: block;
+	font-size: 1.8em;
+	text-align: right;
+	color: #ffb171;
+}
+
+.signUpButton {
+	margin: 20px 0 0 0;
+	width: 212px;
+	height: 30px;
+	display: block;
+	text-transform: lowercase;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 5px 20px;
+	background: -moz-linear-gradient(
+		top,
+		#fff3db 0%,
+		#ffc821 25%,
+		#ffa200);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#fff3db),
+		color-stop(0.25, #ffc821),
+		to(#ffa200));
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border: 1px solid #b85f00;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px -1px 0px rgba(255,255,255,0.7);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px -1px 0px rgba(255,255,255,0.7);
+	text-shadow:
+		0px -1px 1px rgba(000,000,000,0.2),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
+.signupCancelLink {
+	display: block;
+	text-transform: lowercase;
+	float: right;
+	font-size: 2.2em;
+	color: #eee;
+	margin-top: 24px;
+	margin-right: 6px;
+}
+
+#signUpFormPanel .avatarFileNameDisplay {
+	font-size: 1.8em;
+	font-weight: normal;
+	width: 250px;
+	font-style: italic;
+	float: right;
+	margin-top: -2px;
+}
+
+/*------------------------------------------styled file upload*/
+
+.SI-FILES-STYLIZED label.cabinet {
+    width: 79px;
+    height: 22px;
+    background: url('../img/btn-choose-file.gif') 0 0 no-repeat;
+
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.SI-FILES-STYLIZED label.cabinet input.file {
+    position: relative;
+    height: 100%;
+    width: auto;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+
+/* -----------------------------------------=Middle Third Wrapper-----*/
+
+#middleThirdWrapper {
+	position: relative;
+	z-index 0; /*so the upperthird shadow can be on top of this */
+	background-color: #450049;
+	height: 170px;
+	border-bottom: 4px solid #1e0227;
+	-webkit-box-shadow: 0 -6px 6px #29032D;
+     -moz-box-shadow: 0 -6px 6px #29032D;
+          box-shadow: 0 -6px 6px #29032D;
+}
+
+#signUpMiddleStrip {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#ctaText {
+	color: #e0e0e0;
+	width: 560px;
+	text-align: center;
+	margin: 20px auto;
+	font: 2.66em "Heletica Neue", Helvetica, sans-serif;
+	letter-spacing: 1px;
+	text-shadow: rgba(0,0,0,1) -1px -1px 0px;
+
+}
+
+.orangehighlight {
+	color: #ffa358;
+}
+
+#bigSignupButton {
+	width: 222px;
+	height: 70px;
+	display: block;
+	margin: 15px auto;
+	text-indent: -9999px;
+	background: url("../img/spritespandora.png") top center no-repeat;
+	background-position: -288px -77px;
+}
+
+/* ----------------------------------------=LowerThirdWrapper-----*/
+
+#lowerThirdWrapper {
+	width: 960px;
+	margin: 0 auto;
+	position: relative;
+}
+
+#sidetext {
+	width: 460px;
+	height: 266px;
+	
+}
+
+#sidetext h3 {
+	color: #5d5c5c;
+	text-transform: lowercase;
+	text-align: right;
+	margin: 77px 0 0 0;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #c2c2c2;
+	font: bold 5.33em/0.9 "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#sidetext p {
+	padding: 10px 0;
+	border-top: 1px solid #d6d6d6;
+	font: 1.86em/2 "Helvetica Neue", Helvetica, sans-serif;
+	color: #4d4d4d;
+	text-indent: 20px;
+}
+
+.textSignUpLink {
+	font-weight: bold;
+	color: #ee9f23;
+}
+
+#bigWatermark {
+	position: absolute;
+	width: 340px;
+	height: 380px;
+	text-indent: -9999px;
+	background: url("../img/spritespandora.png") top center no-repeat;
+	background-position: -593px -413px;
+	top: 28px;
+	left: 300px;
+	z-index: -1; /*so that it's under everything*/
+}
+
+#logoArea {
+	float: right;
+	margin: 80px 13px 70px 0;
+	text-indent: -9999px;
+	width: 400px;
+	height: 280px;
+	background: url("../img/lowerlogos.png") top center no-repeat;
+}
+
+/* -----------------------------------------=Footer-----*/
+
+#footer {
+	height: 100px;
+	background-color: #000;
+	overflow: hidden;
+}
+
+#footerLogo {
+	width: 158px;
+	text-indent: -9999px;
+	height: 36px;
+	background: url("../img/spritespandora.png") top center no-repeat;
+	background-position: -298px -17px;
+	margin: 14px auto 5px auto;
+}
+
+#footer p {
+	text-align: center;
+	color: #c2c2c2;
+	font: 1.4em/1.2 "Arial Black", Arial, sans-serif; /*10 pt*/
+}
