@@ -68,15 +68,6 @@ class Users extends CI_Model {
 	}
 	
 	function resizeAvatar($uploadData, $usernameForFile, $width, $height){
-		//image resize
-		/*$config['image_library'] = 'gd2';
-		$config['source_image'] = './img/avatars/' . $uploadData['upload_data']['orig_name'];
-		$config['dest_image'] = './img/avatars/' . $usernameForFileConcat . $uploadData['upload_data']['file_ext'];
-		$config['maintain_ratio'] = false;
-		$config['width'] = $width;
-		$config['height'] = $height;
-		
-		$this->load->library('image_lib', $config);*/
 		
 		 /* Configuration for the thumbnail */
         $config['image_library'] = 'gd2';
@@ -117,7 +108,7 @@ class Users extends CI_Model {
             return false;
         }
         
-        /* Yay! It worked! Return true and dance */
+        //Return true and dance
         return true;
 	}
 	
@@ -131,6 +122,7 @@ class Users extends CI_Model {
 		$this->password = $newUserObject['password'];
 		$this->email = $newUserObject['email'];
 		$this->avatar = $newUserObject['avatar'];
+		$this->avatarSmall = $newUserObject['avatarSmall'];
 		$this->experience = 100;
 		$this->rankId = ($createAdmin == true ? 6 : 1); //admins are automatically rank 6
 		$this->postCount = 0;
@@ -144,6 +136,20 @@ class Users extends CI_Model {
 		
 		//use the id to award PandorasBox
 		$this->Tracker->awardAchievement($newUser[0]->userId, 'Opening PandorasBox');
+		
+	}
+	
+	function checkAndGetUser($loginObject){
+		$this->db->where('username', $loginObject['username']);
+		$this->db->where('password', $loginObject['password']); 
+		$query = $this->db->get('users');
+		
+		if ($query->num_rows() > 0){
+			return false;
+		}else{
+			return $query->result();
+		}
+		
 	}
 	
 	function updateUser($updateUserObject) {
