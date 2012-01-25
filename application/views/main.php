@@ -58,7 +58,7 @@
 							
 							<?php foreach ($returnedActs as $act): ?>
 								<div class="activityEntryMain">
-									<p><a href="#" class="actTitleMain"><?php echo $act->pageName; ?></a><span class="actData"> - <?php echo $act->actionTaken; ?> by <?php echo $act->username; ?></span></p>
+									<p><?php echo anchor('site/page/'. $act->pageId, $act->pageName , array('class' => 'actTitleMain'));?><span class="actData"> - <?php echo $act->actionTaken; ?> by <?php echo $act->username; ?></span></p>
 								</div><!--end activity entry -->
 							<?php endforeach;?>
 							

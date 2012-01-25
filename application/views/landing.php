@@ -40,8 +40,8 @@
 						<div class="latestActivityPanel">
 							
 							<?php foreach ($returnedActs as $act): ?>
-								<div class="activityEntry">
-									<p><a href="#" class="actTitle"><?php echo $act->pageName; ?></a><span class="actEditedBy"> - <?php echo $act->actionTaken; ?> by <?php echo $act->username; ?></span></p>
+								<div class="activityEntryMain">
+									<p><?php echo anchor('site/page/'. $act->pageId, $act->pageName , array('class' => 'actTitleMain'));?><span class="actData"> - <?php echo $act->actionTaken; ?> by <?php echo $act->username; ?></span></p>
 								</div><!--end activity entry -->
 							<?php endforeach;?>
 							

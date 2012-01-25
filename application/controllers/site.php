@@ -33,15 +33,25 @@ class Site extends CI_Controller {
 		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
 		$data['returnedActs'] = $this->Pages->getLatestActivity();
 		
-		$test = $this->session->flashdata('searchResults');
-		if(isset($test)){
-			$data['searchResults'] = $test;
+		$searchResultsFlash = $this->session->flashdata('searchResults');
+		if(isset($searchResultsFlash) && $searchResultsFlash != false ){
+			$data['searchResults'] = $searchResultsFlash;
 		};
 		
-		//the General page will be loaded by default, it's ID is 1.
-		$data['pageData'] = $this->Pages->getPageById(1);
-		$data['pageComments'] = $this->Pages->getPageCommentsByPageId(1);
-		$this->load->view('main', $data);
+		//save the pageId in the session to a variable
+		$pageIdFlash = $this->session->flashdata('clickedPageId');
+		
+		if(isset($pageIdFlash) && $pageIdFlash != false ){
+			//if there is a number in the session
+			$data['pageData'] = $this->Pages->getPageById($pageIdFlash);
+			$data['pageComments'] = $this->Pages->getPageCommentsByPageId($pageIdFlash);
+			$this->load->view('main', $data);
+		}else{
+			//the General page will be loaded by default, it's ID is 1.
+			$data['pageData'] = $this->Pages->getPageById(1);
+			$data['pageComments'] = $this->Pages->getPageCommentsByPageId(1);
+			$this->load->view('main', $data);
+		}
 		
 		//$this->session->unset_userdata('searchResults');
 	}
@@ -96,6 +106,18 @@ class Site extends CI_Controller {
 		$this->session->set_flashdata('searchResults', $searchResults);
 		redirect('site/index');
 		
+	}
+	
+	function page(){
+		//this function will change the main page based on the ID in the url being passed
+		//grab the page id from the url by using the uri (not a typo) helper. 
+		//the page clicked is stored in the third segment of the uri.
+		$pageId = $this->uri->segment(3);
+		
+		//flash the clicked page in session
+		$this->session->set_flashdata('clickedPageId', $pageId);
+		//and finally, redirect
+		redirect('site/index');
 	}
 	
 }
