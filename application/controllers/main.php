@@ -43,12 +43,18 @@ class Main extends CI_Controller {
 			//saving the user data returned into a variable called
 			//currentUser, and setting it to a session variable
 			$currentUser = $loggedInUserData;
-			$this->session->set_userdata($currentUser);
+			$this->session->set_userdata('currentUser', $currentUser);
 			//adding the variable 'is_logged_in' to the session
 			$this->session->set_userdata('is_logged_in', true);
 			
 			/*use this to get back all session info
 			var_dump($this->session->all_userdata());*/
+			
+			//dumping the entire session into currentUser
+			$data['currentUser'] = $this->session->userdata('currentUser');
+			$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+			//load the main page
+			$this->load->view('site/main', $data);
 		}
 	}
 	
@@ -102,9 +108,28 @@ class Main extends CI_Controller {
 			//after all that's done
 			//send it to the newUser function in models
 			$this->Users->newUser($newUserObject);
-			//and load the account page
 			
-			//$this->session->set_userdata($newdata);
+			//get the new user back out again by using the getUserByUsername function
+			$loggedInUserData = $this->Users->getUserByUsername($newUserObject['username']);
+				
+			//start session
+			$this->load->library('session');
+			
+			//saving the user data returned into a variable called
+			//currentUser, and setting it to a session variable
+			$currentUser = $loggedInUserData;
+			$this->session->set_userdata('currentUser', $currentUser);
+			//adding the variable 'is_logged_in' to the session
+			$this->session->set_userdata('is_logged_in', true);
+			
+			/*use this to get back all session info
+			var_dump($this->session->all_userdata());*/
+			
+			//dumping the entire session into currentUser
+			$data['currentUser'] = $this->session->userdata('currentUser');
+			$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+			//load the main page
+			$this->load->view('site/main', $data);
 		};
 		
 	}

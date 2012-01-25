@@ -16,14 +16,14 @@ class Users extends CI_Model {
 	function getUserById($userId) {
 		//tested and working
 		$query = $this->db->get_where('users', array('userId' => $userId));
-    	return $query->result();
-		//return $query->result_array();
+    	return $query->row();
+		//return $query->row_array();
 	}
 	
 	function getUserByUsername($username) {
 		//tested and working
 		$query = $this->db->get_where('users', array('username' => $username));
-		return $query->result();
+		return $query->row();
 	}
 	
 	function getUserAchievements($userId) {
@@ -135,7 +135,7 @@ class Users extends CI_Model {
 		$newUser = $this->getUserByUsername($newUserObject['username']);
 		
 		//use the id to award PandorasBox
-		$this->Tracker->awardAchievement($newUser[0]->userId, 'Opening PandorasBox');
+		$this->Tracker->awardAchievement($newUser->userId, 'Opening PandorasBox');
 		
 	}
 	
