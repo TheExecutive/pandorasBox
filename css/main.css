@@ -325,6 +325,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	margin-top: 30px;
 }
 
+.loggedInOptions {
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	text-transform: lowercase;
+	font: bold 3em "Helvetica Neue", Helvetica, sans-serif;
+	border: 1px solid black;
+	height: 20px;
+	padding: 20px 5px 5px 5px;
+	margin: 10px;
+	text-align: right;
+	background-color: #222;
+}
+
+.loggedInOptions:hover {
+	background-color: #FFA358;
+}
+
 /* -----------------------------------------=Error Tooltip-----*/
 
 .errorTooltip {
@@ -709,6 +727,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	margin: 10px;
 	width: 71px;
 	height: 71px;
+	overflow: hidden;
 	border: 2px solid #000;
 	background-color: #000;
 	border-radius: 10px;
@@ -730,6 +749,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	width: 820px;
 	margin: 0 auto;
 	color: #C2C2C2;
+	clear: both;
 }
 
 .achievementDescrip {
@@ -865,7 +885,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 
 #pageMainContent p {
 	padding: 10px;
-	line-height: 1.3em;
+	line-height: 1.6em;
 }
 
 #pageMainContent h2 {
@@ -873,6 +893,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	font-weight: bold;
 	border-bottom: 1px solid #444;
 	color: #A70000;
+}
+
+#pageMainContent #newpage_pagetitle {
+	width: 490px;
+	height: 25px;
+	border: 0;
+	border: 1px solid black;
+	-webkit-border-radius: 5px; 
+     -moz-border-radius: 5px; 
+          border-radius: 5px;
+    margin: 10px;
+    font: bold 1.3em "Helvetica Neue", Helvetica, sans-serif;
+    color: #555555;
+    padding: 10px;
+	
+}
+
+#pageMainContent #newpage_pagecontent {
+	width: 490px;
+	height: 290px;
+	max-width: 700px;
+	display: block;
+	border: 0;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+	-webkit-border-radius: 5px; 
+     -moz-border-radius: 5px; 
+          border-radius: 5px;
+    font: bold 0.8em "Helvetica Neue", Helvetica, sans-serif;
+    color: #555555;
+	
 }
 
 .searchResultsPanel {
@@ -904,6 +956,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e1a8c', end
           -webkit-box-shadow: 1px 1px 2px #000;
      -moz-box-shadow: 1px 1px 2px #000;
           box-shadow: 1px 1px 2px #000; 
+}
+
+.latestActivityPanelMain .tipsAndTricks li{
+	margin: 15px;
+	list-style-type: disc;
+	font-size: 2em;
+	color: #fff;
 }
 
 .searchResult p, .latestActivityPanelMain p {

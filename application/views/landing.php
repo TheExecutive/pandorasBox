@@ -1,23 +1,23 @@
-<?php doctype('html5'); ?>
+<?php doctype('html5');?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<?php $this->load->view('incs/header'); ?>
+	<?php $this->load->view('incs/header');?>
 	<body>
 		<div id="wrapper">
-			<?php echo validation_errors(); ?>
-			<?php $this->load->view($panelContainer); ?>
+			<?php echo validation_errors();?>
+			<?php $this->load->view($panelContainer);?>
 				 
 			<div id="upperThirdWrapper" class="clearfix">
 			<div id="headerWrapper">
 				<div id="header">
 					
-					<?php if(!isset($is_logged_in) || $is_logged_in == false): ?>
+					<?php if(!isset($is_logged_in) || $is_logged_in == false):?>
 						<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
 						<a href="#" id="loginLink"><span class="highlight">&gt;</span> Login</a>
-					<?php else: ?>
+					<?php else:?>
 						<a href="#" id="loginLink"><span class="highlight">&gt;</span> <?php $currentUser->username; ?></a>
-					<?php endif; ?>
+					<?php endif;?>
 					
-				<?php $this->load->view('incs/search'); ?>
+				<?php $this->load->view('incs/search');?>
 					
 				</div><!--End Header DIV-->
 			</div><!-- end headerwrapper-->
@@ -39,7 +39,7 @@
 						<h3>Latest Activity</h3>
 						<div class="latestActivityPanel">
 							
-							<?php foreach ($returnedActs as $act): ?>
+							<?php foreach ($returnedActs as $act):?>
 								<div class="activityEntryMain">
 									<p><?php echo anchor('site/page/'. $act->pageId, $act->pageName , array('class' => 'actTitleMain'));?><span class="actData"> - <?php echo $act->actionTaken; ?> by <?php echo $act->username; ?></span></p>
 								</div><!--end activity entry -->
@@ -113,11 +113,9 @@
 						</p>
 					</div><!--end sidetext-->
 				</div><!--end lowerThirdWrapper-->
-			
-			<?php $this->load->view('incs/footer'); ?>
+			<?php $this->load->view('incs/footer');?>
 		</div><!--End Wrapper DIV-->
-		
 	<!--JS here - If no JS, remove this -->
-	<?php $this->load->view('incs/javascriptfiles'); ?>
+	<?php $this->load->view('incs/javascriptfiles');?>
 	</body>
 </html>

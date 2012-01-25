@@ -36,6 +36,16 @@ class Users extends CI_Model {
 		return $query->result();
 	}
 	
+	function getUserAndRank($userId) {
+		$this->db->from('users');
+		$this->db->join('ranks', 'users.rankId = ranks.rankId');
+		$this->db->where('users.userId', $userId);
+    	$query = $this->db->get();
+		
+		return $query->row();
+		
+	}
+	
 	function getUserCommentsById($userId) {
 		//this is tested and working
 		$this->db->join('users', 'users.userId = comments.userId');

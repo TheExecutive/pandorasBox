@@ -67,6 +67,9 @@ class Site extends CI_Controller {
 	}
 	
 	function postComment(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
 		//var_dump($this->session->userdata('currentUser'));
 		$currentUser = $this->session->userdata('currentUser');
 		//var_dump($currentUser->userId);
@@ -93,6 +96,7 @@ class Site extends CI_Controller {
 	function search(){
 		//validation for search
 		///valiation
+		
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="serverSideValidation">', '</div>');
 		//validation
@@ -109,7 +113,7 @@ class Site extends CI_Controller {
 		//server request, then it is autodeleted.
 		$this->session->set_flashdata('searchResults', $searchResults);
 		redirect('site/index');
-		
+		echo 'this is running';
 	}
 	
 	function page(){
@@ -125,6 +129,9 @@ class Site extends CI_Controller {
 	}
 	
 	function newPage(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
 		//this function will run to pull up the view for creating a new form.
 		$data['pageTitle'] = 'pandorasBox - Create New Page';
 		$data['panelContainer'] = 'incs/panelcontainer';
@@ -133,12 +140,19 @@ class Site extends CI_Controller {
 		$this->load->view('newpage', $data);
 	}
 	
+	function cancelNewPage(){
+		redirect('site/index');
+	}
+	
 	function newPageSubmit(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
 		$currentUser = $this->session->userdata('currentUser');
 		//creating a new page object
 		$newPageObj = array(
 			'pageName' => $this->input->post('newpage_pagetitle'),
-			'pageContent' => $this->input->post('newpage_pagecontent'),
+			'pageContent' => $this->typography->auto_typography($this->input->post('newpage_pagecontent'), true),
 			'userId' => $currentUser->userId
 		);
 		
@@ -153,5 +167,26 @@ class Site extends CI_Controller {
 		redirect('site/index');
 	}
 	
+	function account(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
+		$data['pageTitle'] = 'pandorasBox - Create New Page';
+		$data['panelContainer'] = 'incs/panelcontainer';
+		$data['currentUser'] = $this->session->userdata('currentUser');
+		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+		
+		$user = $this->session->userdata('currentUser');
+		$userId = $user->userId;
+		
+		$data['currentUserAchievements'] = $this->Users->getUserAchievements($userId);
+		$data['currentUserRankInfo'] = $this->Users->getUserAndRank($userId);
+		$this->load->view('account', $data);
+	}
+	
+	function logout(){
+		$this->session->sess_destroy();
+		redirect('main/index');
+	}
 }
 ?>

@@ -1,7 +1,6 @@
-<div id="panelContainer">
-			
+<div id="panelContainer">	
 	<div id="loginPanel">
-		<?php if(!isset($is_logged_in) || $is_logged_in == false): ?>
+		<?php if (!$this->session->userdata('is_logged_in') || $this->session->userdata('is_logged_in') == false):?>
 			<?php echo form_open('main/login');?>
 			<fieldset>
 			<label for="login_userName">Username</label>
@@ -13,10 +12,11 @@
 			<a href="#" class="cancelLink">Cancel</a>
 			<button type="submit" class="signInButton buttondisabled">Sign In</button>
 			</form>
-		<?php endif; ?>
-		
+		<?php else:?>
+			<p><?php echo anchor('site/account/'.$pageData->pageId, 'My Account' , array('class' => 'loggedInOptions'));?></p>
+			<p><?php echo anchor('site/logout', 'Logout' , array('class' => 'loggedInOptions'));?></p>
+		<?php endif;?>
 	</div><!-- end login panel-->
-
 	<div class="errorTooltip">
 		<div class="errorTooltip-body">Oops! That username or password doesn't match any in our database.</div>
 		<div class="errorTooltip-tip"></div>
