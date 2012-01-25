@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php doctype('html5'); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 		<title>pandorasBox - Easy-to-use, simple documentation for the Coldbox Coldfusion framework.</title>
@@ -9,10 +9,11 @@
 			<!--End Metas for Accessibility-->
 			
 			<!--CSS here -->
-			<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />
+			<?php echo link_tag('css/main.css');?>
 	</head>	
 	<body>
 		<div id="wrapper">
+			<?php echo validation_errors(); ?>
 			<?php $this->load->view($panelContainer); ?>
 				 
 			<div id="upperThirdWrapper" class="clearfix">
@@ -22,7 +23,7 @@
 					<a href="#" id="loginLink"><span class="highlight">&gt;</span> Login</a>
 					
 					<div id="searchWrapper">
-						<form method="post" action="#">
+						<?php echo form_open('main/search'); ?>
 							<input type="text" class="searchInput" value="get some answers." />
 							<button type="submit" class="searchButton">Search</button>
 						</form>
@@ -68,12 +69,12 @@
 						
 						<div id="signUpFormPanel">
 							<p class="requiredNotice">&#42; Indicates Required Field</p>
-
 							<!--<form method="post" action="#" enctype="multipart/form-data">-->
+								
 								<?php echo form_open_multipart('main/signup');?>
 								<fieldset>
 									<label for="signup_userName">Username &#42;</label>
-									<input type="text" id="signup_userName" name="signup_username" class="signupForm username" />
+									<input type="text" id="signup_username" name="signup_username" class="signupForm username" />
 									<label for="signup_password">Password &#42;</label>
 									<input type="password" id="signup_password" name="signup_password" class="signupForm password" />
 									<label for="signup_email">Email &#42;</label>
@@ -127,8 +128,6 @@
 		</div><!--End Wrapper DIV-->
 		
 	<!--JS here - If no JS, remove this -->
-	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
-	<script type="text/javascript" src="js/si.files.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	<?php $this->load->view('incs/javascriptfiles'); ?>
 	</body>
 </html>

@@ -145,9 +145,10 @@ class Users extends CI_Model {
 		$query = $this->db->get('users');
 		
 		if ($query->num_rows() > 0){
-			return false;
+			return $query->row();
+			//saying query->row() instead of query->result because we're only expecting one row
 		}else{
-			return $query->result();
+			return false;
 		}
 		
 	}

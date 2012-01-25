@@ -1,16 +1,16 @@
 <div id="panelContainer">
 			
 	<div id="loginPanel">
-		<form method="post" action="#">
+		<?php echo form_open('main/login');?>
 		<fieldset>
 		<label for="login_userName">Username</label>
-		<input type="text" id="login_userName" class="loginForm" />
+		<input type="text" id="login_username" name="login_username"  class="loginForm" />
 		<label for="login_password">Password</label>
-		<input type="password" id="login_password" name="password" class="loginForm" />
+		<input type="password" id="login_password" name="login_password" class="loginForm" />
 		<a href="#">Forgot your password?</a>
 		</fieldset>
 		<a href="#" class="cancelLink">Cancel</a>
-		<button type="button" class="signInButton buttondisabled">Sign In</button>
+		<button type="submit" class="signInButton buttondisabled">Sign In</button>
 		</form>
 	</div><!-- end login panel-->
 

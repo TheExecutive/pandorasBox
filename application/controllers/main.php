@@ -7,7 +7,7 @@ class Main extends CI_Controller {
 		parent::__construct();
 		
 		//form helper, and url helper
-		$this->load->helper(array('form', 'url'));
+		$this->load->helper(array('form', 'url', 'html'));
 		
 		//models
 		$this->load->model('Pages');
@@ -21,7 +21,7 @@ class Main extends CI_Controller {
 		//loading Pages model
 		$data['panelContainer'] = 'incs/panelcontainer';
 		$data['returnedActs'] = $this->Pages->getLatestActivity(3);
-		$this->load->view('pages/landing', $data);
+		$this->load->view('landing', $data);
 	}
 	
 	function login(){
@@ -32,48 +32,81 @@ class Main extends CI_Controller {
 		);
 		//pass login object to checking function
 		$loggedInUserData = $this->Users->checkAndGetUser($loginObject);
-		//if there is no user by that username and pass it will return false
+		//if there is no user by that Username and pass it will return false
 		
 		if($loggedInUserData == false){
 			echo 'bad user';
-			redirect('main/login');
 		}else{
 			//start session
-			//$this->load->library('session');
-			var_dump($loggedInUserData);
-			/*$userSessionObj = array(
-                   'username'  => $loggedInUserData->,
-                   'email'     => 'johndoe@some-site.com',
-                   'logged_in' => TRUE
-             );
-			$this->session->set_userdata($newdata);*/
+			$this->load->library('session');
+			
+			//saving the user data returned into a variable called
+			//currentUser, and setting it to a session variable
+			$currentUser = $loggedInUserData;
+			$this->session->set_userdata($currentUser);
+			//adding the variable 'is_logged_in' to the session
+			$this->session->set_userdata('is_logged_in', true);
+			
+			/*use this to get back all session info
+			var_dump($this->session->all_userdata());*/
 		}
 	}
 	
 	function signup(){
+		///valiation
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div class="serverSideValidation">', '</div>');
+		//validation
+		//field name, error message, validation rules
+		$this->form_validation->set_rules('signup_username', 'Username', 'required|min_length[5]|max_length[12]|is_unique[users.username]');
+		$this->form_validation->set_rules('signup_password', 'Password', 'required');
+		$this->form_validation->set_rules('signup_email', 'Email', 'required|valid_email|is_unique[users.email]');
 		
-		$uploadData = $this->Users->uploadAvatar('signup_avatar');
-		//grabbing the username really quick just to make a name for the file
-		$usernameForFile = $this->input->post('signup_username');
-		//loading image manipulation
-		$this->Users->resizeAvatar($uploadData, $usernameForFile, 100, 100);
-		/*------------------------------------------------*/
+		//running signup validation
+		if($this->form_validation->run() == false){
+			//CI will show the errors and redirect back to the index
+			$this->index();
+		}else{
+			//rock on
+			if($this->input->post('signup_avatar') != ''){
+				//if an avatar has been selected
+				//begin upload process
+				$uploadData = $this->Users->uploadAvatar('signup_avatar');
+				//grabbing the username really quick just to make a name for the file
+				$usernameForFile = $this->input->post('signup_username');
+				//loading image manipulation
+				$this->Users->resizeAvatar($uploadData, $usernameForFile, 100, 100);
+				
+				//place all the information from the form into a newUserObject
+				//including avatar paths.
+				$newUserObject = array(
+					'username' => $this->input->post('signup_username'),
+					'password' => $this->input->post('signup_password'),
+					'email' => $this->input->post('signup_email'),
+					'avatar' => './img/avatars/' . $usernameForFile . '_avtr' . $uploadData['upload_data']['file_ext'],
+					'avatarSmall' => './img/avatars/' . $usernameForFile . '_avtrsmall' . $uploadData['upload_data']['file_ext']
+				);
+			}else{
+				//if no avatar, place all the information from the form into a newUserObject
+				//but leave the avatar fields blank.
+				$newUserObject = array(
+					'username' => $this->input->post('signup_username'),
+					'password' => $this->input->post('signup_password'),
+					'email' => $this->input->post('signup_email'),
+					'avatar' => '',
+					'avatarSmall' => ''
+				);
+				
+			};
+			
+			//after all that's done
+			//send it to the newUser function in models
+			$this->Users->newUser($newUserObject);
+			//and load the account page
+			
+			//$this->session->set_userdata($newdata);
+		};
 		
-		//first, place all the information from the form into a newUserObject.
-		$newUserObject = array(
-			'username' => $this->input->post('signup_username'),
-			'password' => $this->input->post('signup_password'),
-			'email' => $this->input->post('signup_email'),
-			'avatar' => './img/avatars/' . $usernameForFile . '_avtr' . $uploadData['upload_data']['file_ext'],
-			'avatarSmall' => './img/avatars/' . $usernameForFile . '_avtrsmall' . $uploadData['upload_data']['file_ext']
-		);
-		
-		//send it to the newUser function in models
-		$this->Users->newUser($newUserObject);
-		
-		//redirect to login, to login the new user we just created
-		//urlhelper -
-		//redirect('main/login');
 	}
 }
 ?>
