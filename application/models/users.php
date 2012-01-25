@@ -60,11 +60,15 @@ class Users extends CI_Model {
 		//run the upload. by default, the function expect the name on the form
 		//to be "userfile". I am changing it to signup_avatar, because that's
 		//what it's called on my form.
-		$this->upload->do_upload($uploadFormName);
-
-		$uploadData = array('upload_data' => $this->upload->data());
-
-		return $uploadData;
+		
+		if(isset($uploadFormName)){
+			$this->upload->do_upload($uploadFormName);
+			$uploadData = array('upload_data' => $this->upload->data());
+			return $uploadData;
+		}else{
+			return false;
+		};
+		
 	}
 	
 	function resizeAvatar($uploadData, $usernameForFile, $width, $height){

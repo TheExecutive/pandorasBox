@@ -11,6 +11,9 @@ class Site extends CI_Controller {
 		//session
 		$this->load->library('session');
 		
+		//type
+		$this->load->library('typography');
+		
 		//form helper, and url helper
 		$this->load->helper(array('form', 'url', 'html'));
 		
@@ -55,7 +58,9 @@ class Site extends CI_Controller {
 		$newCommentObject = array(
 			"pageId" => $this->input->post('pageId'),
 			"userId" => $currentUser->userId,
-			"commentContent" => $this->input->post('comment_post')
+			"commentContent" => $this->typography->auto_typography($this->input->post('comment_post'), true)
+			//running the comment post through typography plugin in order to get formatted line breaks
+			//the true is to reduce line breaks
 		);
 		//passing it to function
 		//var_dump($newCommentObject);
@@ -64,8 +69,14 @@ class Site extends CI_Controller {
 		redirect('site/index');
 	}
 	
-	function bitch(){
-		echo 'what the fuck';
+	function search(){
+		//begin search
+		//first, get the search tearm out of the form.
+		$termToSearch = $this->input->post('search_term');
+		
+		if($termToSearch == 'get some answers.'){
+			//if the term to search is the default value, don't do the search.
+		};
 	}
 	
 }

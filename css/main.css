@@ -203,6 +203,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	text-transform: lowercase;
 	color: #fff;
 	font: 2.4em "Arial Black", Arial, sans-serif;
+	text-shadow: 2px 2px 1px #000;
 }
 
 #loginLink:hover {
@@ -910,8 +911,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 }
 
 .commentProfilePic {
-	width: 50px;
-	height: 50px;
+	width: 75px;
+	height: 75px;
 	background-color: #222;
 	border: 2px solid #FFA358;
 	float: left;
@@ -935,6 +936,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	padding: 20px;
 	font-size: 2em;
 	background-color: #eee;
+}
+
+.commentAreaPost .noPadding {
+	padding: 0px;
 }
 
 /* -----------------------------------------=Big Ass Signup Panel-----*/

@@ -17,12 +17,7 @@
 						<a href="#" id="loginLink"><span class="highlight">&gt;</span> <?php $currentUser->username; ?></a>
 					<?php endif; ?>
 					
-					<div id="searchWrapper">
-						<?php echo form_open('main/search'); ?>
-							<input type="text" class="searchInput" value="get some answers." />
-							<button type="submit" class="searchButton">Search</button>
-						</form>
-					</div><!--end searchWrapper -->
+				<?php $this->load->view('incs/search'); ?>
 					
 				</div><!--End Header DIV-->
 			</div><!-- end headerwrapper-->

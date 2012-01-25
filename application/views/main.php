@@ -16,12 +16,7 @@
 						<a href="#" id="loginLink"><span class="highlight">&gt;</span> <?php echo $currentUser->username; ?></a>
 					<?php endif; ?>
 					
-					<div id="searchWrapper">
-						<form method="post" action="#">
-							<input type="text" class="searchInput" value="get some answers." />
-							<button type="submit" class="searchButton">Search</button>
-						</form>
-					</div><!--end searchWrapper -->
+					<?php $this->load->view('incs/search'); ?>
 					
 				</div><!--End Header DIV-->
 			</div><!-- end headerwrapper-->
@@ -80,22 +75,29 @@
 					</div><!--end big watermark-->
 					
 					<div id="commentAreaWrapper">
-						<div id="postCommentForm">
-							<h3>&gt; post a <span class="orangehighlight">comment</span><span class="commentTitleSmaller"> in <span class="nameOfThread"><?php echo $pageData->pageName; ?></span></h3>
-							<?php echo form_open('site/postComment'); ?>
-							<?php echo form_hidden('pageId', $pageData->pageId ); ?>
-								<textarea id="comment_post" name="comment_post" class="comment">Type your comment here.</textarea>
-								<button type="submit" class="buttondisabled clearfix">Submit</button>
-							</form>
-						</div><!-- end Post comment form -->
+						<?php if(isset($is_logged_in) && $is_logged_in == true): ?>
+							<!--The ability to post comments doesn't show up if you're not logged in-->
+							<div id="postCommentForm">
+								<h3>&gt; post a <span class="orangehighlight">comment</span><span class="commentTitleSmaller"> in <span class="nameOfThread"><?php echo $pageData->pageName; ?></span></h3>
+								<?php echo form_open('site/postComment'); ?>
+								<?php echo form_hidden('pageId', $pageData->pageId ); ?>
+									<textarea id="comment_post" name="comment_post" class="comment">Type your comment here.</textarea>
+									<button type="submit" class="buttondisabled clearfix">Submit</button>
+								</form>
+							</div><!-- end Post comment form -->
+						<?php else: ?>
+							<div id="postCommentForm">
+								<h3>&gt; view <span class="orangehighlight">comments</span><span class="commentTitleSmaller"> in <span class="nameOfThread"><?php echo $pageData->pageName; ?></span></h3>
+							</div><!-- end Post comment form -->
+						<?php endif; ?>
 						
 						<div id="commentArea">
 							
 							<?php foreach ($pageComments as $comment): ?>
 								<div class="commentAreaPost">
-									<div class="commentProfilePic"><img src="img/testimage.gif" alt="Profile Pic" /></div><!-- end profile pic-->
+									<div class="commentProfilePic"><?php echo img($comment->avatarSmall)?></div><!-- end profile pic-->
 									<h4><span class="posterName"><?php echo $comment->username; ?></span><span class="postedDate">posted <?php echo $comment->commentDate; ?></span></h4>
-									<p><?php echo $comment->commentContent; ?></p>
+									<p class="noPadding"><?php echo $comment->commentContent; ?></p>
 								</div><!--end commentAreaPost -->
 							<?php endforeach;?>
 							

@@ -67,9 +67,10 @@ class Main extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<div class="serverSideValidation">', '</div>');
 		//validation
 		//field name, error message, validation rules
-		$this->form_validation->set_rules('signup_username', 'Username', 'required|min_length[5]|max_length[12]|is_unique[users.username]');
-		$this->form_validation->set_rules('signup_password', 'Password', 'required');
-		$this->form_validation->set_rules('signup_email', 'Email', 'required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('signup_username', 'username', 'required|min_length[5]|max_length[12]|is_unique[users.username]');
+		$this->form_validation->set_rules('signup_password', 'password', 'required');
+		$this->form_validation->set_rules('signup_email', 'email', 'required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_message('is_unique', "Oops! It looks like someone already took that %s. Pick another.");
 		
 		//running signup validation
 		if($this->form_validation->run() == false){
@@ -77,10 +78,11 @@ class Main extends CI_Controller {
 			$this->index();
 		}else{
 			//rock on
-			if($this->input->post('signup_avatar') != ''){
+			//begin upload process
+			$uploadData = $this->Users->uploadAvatar('signup_avatar');
+			if($uploadData != false){
 				//if an avatar has been selected
-				//begin upload process
-				$uploadData = $this->Users->uploadAvatar('signup_avatar');
+				
 				//grabbing the username really quick just to make a name for the file
 				$usernameForFile = $this->input->post('signup_username');
 				//loading image manipulation
@@ -132,7 +134,7 @@ class Main extends CI_Controller {
 			$data['currentUser'] = $this->session->userdata('currentUser');
 			$data['is_logged_in'] = $this->session->userdata('is_logged_in');
 			//load the main page
-			$this->load->view('site/main', $data);
+			redirect('site/index');
 		};
 		
 	}
