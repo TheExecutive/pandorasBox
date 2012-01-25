@@ -6,6 +6,10 @@ class Main extends CI_Controller {
 		//any constructor must contain this
 		parent::__construct();
 		
+		//start session
+		$this->load->library('session');
+		
+		
 		//form helper, and url helper
 		$this->load->helper(array('form', 'url', 'html'));
 		
@@ -17,8 +21,23 @@ class Main extends CI_Controller {
     }
 	   
 	function index() {
+		
+		$this->checkLoggedInIndex(); //has to be in the index for some reason
+		
 		//index will always be the default function in a controller class.
 		//loading Pages model
+		//$this->session->sess_destroy();
+		
+		//check session at the beginning
+		/*$isloggedIn = $this->session->userdata('is_logged_in');
+		if(!isset($isloggedIn) || $isloggedIn != true) {
+			//if no user is logged in, kill any remaining session vars
+			//and set is_logged_in to false
+			echo 'death to sessions';
+			$this->session->sess_destroy();
+			$this->session->set_userdata('is_logged_in', false);
+		};*/
+		
 		$data['pageTitle'] = 'pandorasBox - Easy-to-use, simple documentation for the Coldbox Coldfusion framework.';
 		$data['panelContainer'] = 'incs/panelcontainer';
 		$data['returnedActs'] = $this->Pages->getLatestActivity();
@@ -116,9 +135,6 @@ class Main extends CI_Controller {
 			
 			//get the new user back out again by using the getUserByUsername function
 			$loggedInUserData = $this->Users->getUserByUsername($newUserObject['username']);
-				
-			//start session
-			$this->load->library('session');
 			
 			//saving the user data returned into a variable called
 			//currentUser, and setting it to a session variable
@@ -134,6 +150,16 @@ class Main extends CI_Controller {
 			$data['currentUser'] = $this->session->userdata('currentUser');
 			$data['is_logged_in'] = $this->session->userdata('is_logged_in');
 			//load the main page
+			redirect('site/index');
+		};
+		
+	}
+
+	function checkLoggedInIndex(){
+		$is_logged_in = $this->session->userdata('is_logged_in');
+		
+		if(isset($is_logged_in) && $is_logged_in == true){
+			//if they're logged in, get them off of the landing page
 			redirect('site/index');
 		};
 		

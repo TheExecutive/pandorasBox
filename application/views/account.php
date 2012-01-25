@@ -10,7 +10,7 @@
 				<div id="header">
 					<?php echo validation_errors(); ?>
 					<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
-					<a href="#" id="accountLink"><span class="highlight">&gt;</span>awesomeCoder</a>
+					<a href="#" id="accountLink"><span class="highlight">&gt;</span><?php echo $currentUser->username; ?></a>
 					
 					<?php $this->load->view('incs/search'); ?>
 					

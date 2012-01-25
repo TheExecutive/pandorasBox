@@ -9,16 +9,13 @@
 			<div id="upperThirdWrapper" class="clearfix">
 			<div id="headerWrapper">
 				<div id="header">
-					
 					<?php if(!isset($is_logged_in) || $is_logged_in == false):?>
 						<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
 						<a href="#" id="loginLink"><span class="highlight">&gt;</span> Login</a>
 					<?php else:?>
 						<a href="#" id="loginLink"><span class="highlight">&gt;</span> <?php $currentUser->username; ?></a>
 					<?php endif;?>
-					
-				<?php $this->load->view('incs/search');?>
-					
+					<?php $this->load->view('incs/search');?>
 				</div><!--End Header DIV-->
 			</div><!-- end headerwrapper-->
 			<div id="upperThirdContent">

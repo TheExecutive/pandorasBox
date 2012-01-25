@@ -394,7 +394,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	color: #9d9d9d;
 	border: 0;
 	padding: 0 20px;
-	width: 220px;
 	height: 32px;
   -webkit-border-radius: 15px; 
      -moz-border-radius: 15px; 
@@ -895,7 +894,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	color: #A70000;
 }
 
-#pageMainContent #newpage_pagetitle {
+#pageMainContent #newpage_pagetitle, #pageMainContent #editpage_pagetitle {
 	width: 490px;
 	height: 25px;
 	border: 0;
@@ -910,7 +909,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	
 }
 
-#pageMainContent #newpage_pagecontent {
+#pageMainContent #newpage_pagecontent, #pageMainContent #editpage_pagecontent  {
 	width: 490px;
 	height: 290px;
 	max-width: 700px;
@@ -928,7 +927,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 }
 
 .searchResultsPanel {
-	min-height: 100px;
+	min-height: 50px;
 	width: 900px;
 	padding: 20px;
 	background-color: #000;

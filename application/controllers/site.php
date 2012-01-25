@@ -144,6 +144,10 @@ class Site extends CI_Controller {
 		redirect('site/index');
 	}
 	
+	function cancelEditPage(){
+		redirect('site/index');
+	}
+	
 	function newPageSubmit(){
 		//this page is protected, so check if logged in or not
 		$this->checkLoggedIn();
@@ -163,6 +167,48 @@ class Site extends CI_Controller {
 		
 		//flash it and send it to the index
 		$this->session->set_flashdata('selectedPageId', $pageJustMade->pageId);
+		//send it back to the top
+		redirect('site/index');
+	}
+
+	function editPage(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
+		//this function will run to pull up the view for creating a new form.
+		$data['pageTitle'] = 'pandorasBox - Create New Page';
+		$data['panelContainer'] = 'incs/panelcontainer';
+		$data['currentUser'] = $this->session->userdata('currentUser');
+		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+		$data['pageData'] = $this->Pages->getPageById($this->uri->segment(3));
+		$data['pageComments'] = $this->Pages->getPageCommentsByPageId($this->uri->segment(3));
+		
+		$this->load->view('editpage', $data);
+		
+		//this function will change the main page based on the ID in the url being passed
+		//grab the page id from the url by using the uri (not a typo) helper. 
+		//the page clicked is stored in the third segment of the uri.
+	}
+	
+	function editPageSubmit(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
+		$currentUser = $this->session->userdata('currentUser');
+		//creating a update page object
+		$pageId = $this->uri->segment(3);
+		$updatePageObj = array(
+			'pageId' => $pageId,
+			'pageName' => $this->input->post('editpage_pagetitle'),
+			'pageContent' => $this->typography->auto_typography($this->input->post('editpage_pagecontent'), true),
+			'userId' => $currentUser->userId
+		);
+		
+		//passing it to the function in pages
+		$this->Pages->updatePage($updatePageObj);
+		
+		//flash it and send it the pageId to the index to be loaded
+		$this->session->set_flashdata('selectedPageId', $pageId);
 		//send it back to the top
 		redirect('site/index');
 	}

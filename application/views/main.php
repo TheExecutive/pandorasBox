@@ -32,7 +32,7 @@
 						<p class="loggedInAs">Welcome! You're logged in as "<strong><?php echo $currentUser->username; ?></strong>",  <span class="loggedSmaller">a rank <strong><?php echo $currentUser->rankId; ?></strong> account.</span></p>
 						<ul>
 							<li><?php echo anchor('site/newpage', '&gt; Create New Page' , array('class' => 'controlBarButton'));?></li>
-							<li><?php echo anchor('site/editpage', '&gt; Edit This Page' , array('class' => 'controlBarButton'));?></li>
+							<li><?php echo anchor('site/editpage/'.$pageData->pageId, '&gt; Edit This Page' , array('class' => 'controlBarButton'));?></li>
 						</ul>
 					</div><!--end controlBar-->
 				<?php endif; ?>
