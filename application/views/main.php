@@ -44,7 +44,7 @@
 						
 						<?php foreach ($searchResults as $searchResult): ?>
 							<div class="searchResult">
-								<p><a href="#" class="resultTitle"><?php echo $searchResult->pageName; ?></a><span class="resultInfo"> - Created <?php echo $searchResult->dateCreated; ?></span></p>
+								<p><?php echo anchor('site/page/'. $searchResult->pageId, $searchResult->pageName , array('class' => 'resultTitle'));?><span class="resultInfo"> - Created <?php echo $searchResult->dateCreated; ?></span></p>
 							</div><!--end activity entry -->
 						<?php endforeach;?>
 							
