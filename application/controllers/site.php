@@ -33,10 +33,17 @@ class Site extends CI_Controller {
 		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
 		$data['returnedActs'] = $this->Pages->getLatestActivity();
 		
+		$test = $this->session->flashdata('searchResults');
+		if(isset($test)){
+			$data['searchResults'] = $test;
+		};
+		
 		//the General page will be loaded by default, it's ID is 1.
 		$data['pageData'] = $this->Pages->getPageById(1);
 		$data['pageComments'] = $this->Pages->getPageCommentsByPageId(1);
 		$this->load->view('main', $data);
+		
+		//$this->session->unset_userdata('searchResults');
 	}
 	
 	function checkLoggedIn(){
@@ -70,13 +77,25 @@ class Site extends CI_Controller {
 	}
 	
 	function search(){
-		//begin search
+		//validation for search
+		///valiation
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div class="serverSideValidation">', '</div>');
+		//validation
+		//field name, error message, validation rules
+		$this->form_validation->set_rules('search_term', 'search', 'required');
+		$this->form_validation->set_message('required', "You can't %s for nothing! It's like dividing by zero.");
 		//first, get the search tearm out of the form.
 		$termToSearch = $this->input->post('search_term');
 		
-		if($termToSearch == 'get some answers.'){
-			//if the term to search is the default value, don't do the search.
-		};
+		//searching
+		$searchResults = $this->Pages->searchPages($termToSearch);
+		
+		//flashdata is session data that will only be stored for the next
+		//server request, then it is autodeleted.
+		$this->session->set_flashdata('searchResults', $searchResults);
+		redirect('site/index');
+		
 	}
 	
 }

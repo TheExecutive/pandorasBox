@@ -8,7 +8,7 @@
 			<div id="upperThirdWrapper" class="clearfix">
 			<div id="headerWrapper">
 				<div id="header">
-					
+					<?php echo validation_errors(); ?>
 					<?php if(!isset($is_logged_in) || $is_logged_in == false): ?>
 						<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
 						<a href="#" id="loginLink"><span class="highlight">&gt;</span> Login</a>
@@ -37,21 +37,21 @@
 					</div><!--end controlBar-->
 				<?php endif; ?>
 				
+				<?php if(isset($searchResults) && $searchResults != false): ?>
 				<div id="searchResultsWrapper">
 						<h3>Search Results</h3>
 						<div class="searchResultsPanel">
-							
+						
+						<?php foreach ($searchResults as $searchResult): ?>
 							<div class="searchResult">
-								<p><a href="#" class="resultTitle">ORM</a><span class="resultInfo"> - Created on 1/22/2012</span></p>
+								<p><a href="#" class="resultTitle"><?php echo $searchResult->pageName; ?></a><span class="resultInfo"> - Created <?php echo $searchResult->dateCreated; ?></span></p>
 							</div><!--end activity entry -->
-							
-							<div class="searchResult">
-								<p><a href="#" class="resultTitle">Interceptors</a><span class="resultInfo"> - Created on 1/22/2012</span></p>
-							</div><!--end activity entry -->
+						<?php endforeach;?>
 							
 						</div><!--end searchResultsPanel-->
 					</div><!--end searchResultsWrapper-->
-					
+				<?php endif; ?>
+				
 					<div id="latestActivityWrapperMain">
 						<h3>Latest Activity</h3>
 						<div class="latestActivityPanelMain">
