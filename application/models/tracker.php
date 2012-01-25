@@ -30,7 +30,16 @@ class Tracker extends CI_Model {
 		$this->db->set('postCount', 'postCount + ' . $postNumToAdd, false); 
 		//false tells it not to escape the query
 		$this->db->update('users', $this, array('userId' => $userId)); 
-		
+		$this->checkForRewards($userId);
+	}
+	
+	function addPostCountAndExperience($userId, $postNumToAdd = 1, $expToAdd = 10){
+		$this->db->set('postCount', 'postCount + ' . $postNumToAdd, false);
+		$this->db->set('experience', 'experience + ' . $expToAdd, false); 
+		//false tells it not to escape the query, meaning it will write
+		//VALUES (field+1) instead of VALUES ('field+1'), we don't want it escaped
+		//in this case, since we're doing math
+		$this->db->update('users', $this, array('userId' => $userId)); 
 		$this->checkForRewards($userId);
 	}
 	
@@ -63,7 +72,7 @@ class Tracker extends CI_Model {
 		//print_r($usersQuery[0]->username); this works, reference this
 		
 		//checking for increase in rank
-		switch ($usersQuery[0]->experience){
+		switch ($usersQuery->experience){
 			case 100:
 				$this->promoteRank($userId);
 				break;
@@ -133,14 +142,14 @@ class Tracker extends CI_Model {
 		//Opening PandorasBox will be awarded on new user signup, no need to check for it.
 		
 		//checking for First!
-		if($usersQuery[0]->postCount >= 1 && $achieveBooleanArray['has_First'] == false) {
+		if($usersQuery->postCount >= 1 && $achieveBooleanArray['has_First'] == false) {
 			//if the postcount is greater than or equal to one 
 			//and they don't have the achievement already
 			$this->awardAchievement($userId, 'First!');
 		}
 		
 		//checking for Scribe
-		if($usersQuery[0]->pageEditCount >= 1 && $achieveBooleanArray['has_Scribe'] == false) {
+		if($usersQuery->pageEditCount >= 1 && $achieveBooleanArray['has_Scribe'] == false) {
 			//if the pageEditCount is greater than or equal to one 
 			//and they don't have the achievement already
 			$this->awardAchievement($userId, 'Scribe');
@@ -149,14 +158,14 @@ class Tracker extends CI_Model {
 		//Visual Aid will be awarded on avatar upload, no need to check for it here.
 		
 		//checking for The Social Network
-		if($usersQuery[0]->postCount >= 5 && $achieveBooleanArray['has_TheSocialNetwork'] == false) {
+		if($usersQuery->postCount >= 5 && $achieveBooleanArray['has_TheSocialNetwork'] == false) {
 			//if the pageEditCount is greater than or equal to 5
 			//and they don't have the achievement already
 			$this->awardAchievement($userId, 'The Social Network');
 		}
 		
 		//checking for Contributor
-		if($usersQuery[0]->pageEditCount >= 5 && $achieveBooleanArray['has_Contributor'] == false) {
+		if($usersQuery->pageEditCount >= 5 && $achieveBooleanArray['has_Contributor'] == false) {
 			//if the pageEditCount is greater than or equal to 5
 			//and they don't have the achievement already
 			$this->awardAchievement($userId, 'Contributor');
@@ -165,7 +174,7 @@ class Tracker extends CI_Model {
 		//Customado will be awarded on the first edit, no need to check for it.
 		
 		//checking for Mona Lisa
-		if($usersQuery[0]->pageCreationCount >= 5 && $achieveBooleanArray['has_MonaLisa'] == false) {
+		if($usersQuery->pageCreationCount >= 5 && $achieveBooleanArray['has_MonaLisa'] == false) {
 			//if the pageEditCount is greater than or equal to 5
 			//and they don't have the achievement already
 			$this->awardAchievement($userId, 'Mona Lisa');

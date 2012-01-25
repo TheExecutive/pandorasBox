@@ -13,6 +13,7 @@ class Pages extends CI_Model {
 		//get the last ten activities and display them
 		$this->db->join('pages', 'pages.pageId = activity.pageId');
 		$this->db->join('users', 'users.userId = activity.userId');
+		$this->db->order_by("timeOfAction", "desc"); 
 		$query = $this->db->get('activity', $numberToDisplay);
 		return $query->result();
 	}
@@ -26,7 +27,7 @@ class Pages extends CI_Model {
 		$this->userId = $userId;
 		$this->actionTaken = $actionTaken;
 		$this->timeOfAction = mdate($datestring, time());
-		$this->db->insert('pages', $this);
+		$this->db->insert('activity', $this);
 	}
 	
 	function getAllPages() {

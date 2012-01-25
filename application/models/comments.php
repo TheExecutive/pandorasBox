@@ -44,12 +44,26 @@ class Comments extends CI_Model {
 		
         $this->db->insert('comments', $this);
 		
-		//adding experience
-		$this->Tracker->addExperience($newCommentObject['userId']);
-		//adding to postcount
-		$this->Tracker->addPostCount($newCommentObject['userId']);
+		$userId = $newCommentObject['userId'];
+		
 		//adding to activity log
-		$this->updateActivityLog($newCommentObject['pageId'], $newCommentObject['userId'], 'Comment posted');
+		$this->Pages->updateActivityLog($newCommentObject['pageId'], $newCommentObject['userId'], 'Comment posted');
+		//adding to both postcount and experience
+		$this->Tracker->addPostCountAndExperience($userId);
+		
+		/*I think I found a bug in CodeIgniter.
+		 * These two functions I have commented out run just fine independently of each other
+		 * but do not run when placed side by side. I had to combine the 
+		 * two functions together in the bigger function directly above this comment in order to get
+		 * the result I wanted. I assume it has something to do with the math
+		 * I'm running on the database.
+		 * How about some bonus points for finding a bug, Orcun? =)
+		*/
+		//adding to postcount
+		//$this->Tracker->addPostCount($userId);
+		//adding experience
+		//$this->Tracker->addExperience($userId);
+		
 	}
 	
 	function updateComment($updateCommentObject) {

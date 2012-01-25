@@ -81,8 +81,9 @@
 					
 					<div id="commentAreaWrapper">
 						<div id="postCommentForm">
-							<h3>&gt; post a <span class="orangehighlight">comment</span><span class="commentTitleSmaller"> in <span class="nameOfThread">General</span></h3>
-							<form method="post" action="#">
+							<h3>&gt; post a <span class="orangehighlight">comment</span><span class="commentTitleSmaller"> in <span class="nameOfThread"><?php echo $pageData->pageName; ?></span></h3>
+							<?php echo form_open('site/postComment'); ?>
+							<?php echo form_hidden('pageId', $pageData->pageId ); ?>
 								<textarea id="comment_post" name="comment_post" class="comment">Type your comment here.</textarea>
 								<button type="submit" class="buttondisabled clearfix">Submit</button>
 							</form>

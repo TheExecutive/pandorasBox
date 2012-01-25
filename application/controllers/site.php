@@ -28,7 +28,7 @@ class Site extends CI_Controller {
 		$data['panelContainer'] = 'incs/panelcontainer';
 		$data['currentUser'] = $this->session->userdata('currentUser');
 		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
-		$data['returnedActs'] = $this->Pages->getLatestActivity(3);
+		$data['returnedActs'] = $this->Pages->getLatestActivity();
 		
 		//the General page will be loaded by default, it's ID is 1.
 		$data['pageData'] = $this->Pages->getPageById(1);
@@ -44,6 +44,28 @@ class Site extends CI_Controller {
 			redirect('site/index');
 		};
 		
+	}
+	
+	function postComment(){
+		//var_dump($this->session->userdata('currentUser'));
+		$currentUser = $this->session->userdata('currentUser');
+		//var_dump($currentUser->userId);
+		//var_dump($this->input->post('pageId'));
+		//creating comment object
+		$newCommentObject = array(
+			"pageId" => $this->input->post('pageId'),
+			"userId" => $currentUser->userId,
+			"commentContent" => $this->input->post('comment_post')
+		);
+		//passing it to function
+		//var_dump($newCommentObject);
+		
+		$this->Comments->postNewComment($newCommentObject);
+		redirect('site/index');
+	}
+	
+	function bitch(){
+		echo 'what the fuck';
 	}
 	
 }
