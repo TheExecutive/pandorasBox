@@ -13,8 +13,9 @@
 		errorTooltip = $('.errorTooltip'),
 		signUpPanel = $('#bigAssSignupPanel'),
 		signUpButton = $('#bigSignupButton')
-		shutterUp = false;
-		shutterAnimating = false;
+		shutterUp = false,
+		shutterAnimating = false,
+		achievementGridLis = $('#achievementGrid li')
 	;
 	
 	
@@ -43,8 +44,41 @@
 			return false;
 		});
 		
+		
+		
 		//big signup button
 		$('#bigSignupButton').live("click", function() {
+			//slide the upper third up by 516px
+			if(shutterAnimating === false){
+				//don't run this code unless the shudder isn't currently animating
+				if(shutterUp === false){
+					shutterAnimating = true;
+					upperThird.animate({
+						top: '-516px'
+					}, 2000, function() {
+						//animation complete
+						shutterAnimating = false;
+					});
+					signUpPanel.show();
+					shutterUp = true;
+				}else{
+					shutterAnimating = true;
+					upperThird.animate({
+						top: '0px'
+					}, 2000, function() {
+						//animation complete
+						signUpPanel.hide();
+						shutterUp = false;
+						shutterAnimating = false;
+					});
+				};
+			}
+			
+			return false;
+		});
+		
+		//big signup button
+		$('.signupCancelLink').live("click", function() {
 			//slide the upper third up by 516px
 			if(shutterAnimating === false){
 				//don't run this code unless the shudder isn't currently animating
@@ -109,6 +143,17 @@
 				//the button isn't clickable unless the login is valid
 				userLogin();
 			};
+			return false;
+		});
+		
+		//achievements
+		$('#achievementGrid li').on("mouseover", function(){
+			that = $(this);
+			var achieveName = that.children().attr('alt');
+			var achieveDesc = that.children().attr('data_descrip');
+			$('#achievementPanel h4').text(achieveName);
+			$('.achievementDescrip').text(achieveDesc);
+			
 			return false;
 		});
 		

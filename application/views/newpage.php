@@ -36,6 +36,7 @@
 								<li>Never assume someone will know what you're talking about. Start off by explaining your topic like you would to a Coldfusion beginner.</li>
 								<li>The more examples, the better. Give code, code, and more code.</li>
 								<li>Use proper spelling and grammar. Aint nobodi gon' pay no attenshun to u if u tallkin liek dis.</li>
+								<li>Use the &lt;code&gt; tag to write your example code.</li>
 								<li>Most importantly, have fun!</li>
 							</ul>
 							

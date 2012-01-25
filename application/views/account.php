@@ -18,11 +18,16 @@
 			</div><!-- end headerwrapper-->
 			<div id="upperThirdContent">
 				<h2 class="accountTitle"><?php echo $currentUser->username ?>'s account</h2>
+					<h2 class="controlBarHeader">Control Bar</h2>
+					<div id="controlBar">
+						<p class="loggedInAs">Welcome! You're logged in as "<strong><?php echo $currentUser->username; ?></strong>",  <span class="loggedSmaller">a rank <strong><?php echo $currentUser->rankId; ?></strong> account.</span></p>
+						<ul>
+							<li><?php echo anchor('site/editAccount/'.$pageData->pageId, '&gt; Edit Description' , array('class' => 'controlBarButton'));?></li>
+							<li><?php echo anchor('site/page/'.$pageData->pageId, '&gt; Back' , array('class' => 'controlBarButton'));?></li>
+						</ul>
+					</div><!--end controlBar-->
 				<div id="accountSidePanel">
-					<ul>
-						<li><a href="#">&gt; Edit Description</a></li>
-						<li><?php echo anchor('site/page/', 'back to main page')?></li>
-					</ul>
+					
 				</div><!--end sidepanel-->
 				
 				<div id="accountMainPanel">
@@ -54,7 +59,7 @@
 							<?php endforeach;?>
 						</ul>
 						<h4>Your achievements are listed here.</h4>
-						<p class="achievementDescrip clearfix">Click on any achievement you've earned to get details.</p>
+						<p class="achievementDescrip clearfix">Hover your mouse over any achievement you've earned to get details.</p>
 					</div><!--end achievement panel -->
 				</div><!--end lowerThirdWrapper-->
 			<?php $this->load->view('incs/footer');?>

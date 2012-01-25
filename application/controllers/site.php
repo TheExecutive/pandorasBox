@@ -70,27 +70,38 @@ class Site extends CI_Controller {
 		//this page is protected, so check if logged in or not
 		$this->checkLoggedIn();
 		
-		//var_dump($this->session->userdata('currentUser'));
-		$currentUser = $this->session->userdata('currentUser');
-		//var_dump($currentUser->userId);
-		//var_dump($this->input->post('pageId'));
-		//creating comment object
-		$newCommentObject = array(
-			"pageId" => $this->input->post('pageId'),
-			"userId" => $currentUser->userId,
-			"commentContent" => $this->typography->auto_typography($this->input->post('comment_post'), true)
-			//running the comment post through typography plugin in order to get formatted line breaks
-			//the true is to reduce line breaks
-		);
-		//passing it to function
-		//var_dump($newCommentObject);
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div class="serverSideValidation">', '</div>');
+		//validation
+		//field name, error message, validation rules
+		$this->form_validation->set_rules('comment_post', 'comment', 'required');
+		$this->form_validation->set_message('required', "Your %s can't be blank.");
 		
-		$this->Comments->postNewComment($newCommentObject);
+		if($this->form_validation->run() == false){
+			//CI will show the errors and redirect back to the index
+			$this->index();
+		}else{
+			$currentUser = $this->session->userdata('currentUser');
+			//creating comment object
+			$newCommentObject = array(
+				"pageId" => $this->input->post('pageId'),
+				"userId" => $currentUser->userId,
+				"commentContent" => $this->typography->auto_typography($this->input->post('comment_post'), true)
+				//running the comment post through typography plugin in order to get formatted line breaks
+				//the true is to reduce line breaks
+			);
+			//passing it to function
+			//var_dump($newCommentObject);
+			
+			$this->Comments->postNewComment($newCommentObject);
+			
+			//flash the page I'm on and send it to the index
+			$this->session->set_flashdata('selectedPageId', $newCommentObject['pageId']);
+			
+			redirect('site/index');
+		}
 		
-		//flash the page I'm on and send it to the index
-		$this->session->set_flashdata('selectedPageId', $newCommentObject['pageId']);
 		
-		redirect('site/index');
 	}
 	
 	function search(){
@@ -225,9 +236,54 @@ class Site extends CI_Controller {
 		$user = $this->session->userdata('currentUser');
 		$userId = $user->userId;
 		
+		$pageIdIWasOn = $this->uri->segment(3);
+		$data['pageData'] = $this->Pages->getPageById($pageIdIWasOn);
+		
 		$data['currentUserAchievements'] = $this->Users->getUserAchievements($userId);
 		$data['currentUserRankInfo'] = $this->Users->getUserAndRank($userId);
 		$this->load->view('account', $data);
+	}
+	
+	function editAccount(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
+		$data['pageTitle'] = 'pandorasBox - Create New Page';
+		$data['panelContainer'] = 'incs/panelcontainer';
+		$data['currentUser'] = $this->session->userdata('currentUser');
+		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+		
+		$user = $this->session->userdata('currentUser');
+		$userId = $user->userId;
+		
+		$pageIdIWasOn = $this->uri->segment(3);
+		$data['pageData'] = $this->Pages->getPageById($pageIdIWasOn);
+		
+		$data['currentUserAchievements'] = $this->Users->getUserAchievements($userId);
+		$data['currentUserRankInfo'] = $this->Users->getUserAndRank($userId);
+		$this->load->view('editaccount', $data);
+		
+	}
+
+	function editDescriptionSubmit(){
+		//this page is protected, so check if logged in or not
+		$this->checkLoggedIn();
+		
+		$currentUser = $this->session->userdata('currentUser');
+		//creating a update page object
+		$pageId = $this->uri->segment(3);
+		$updateUserObj = array(
+			'userId' => $currentUser->userId,
+			'description' => $this->input->post('editaccount_description')
+		);
+		
+		//passing it to the function in users
+		$this->Users->updateUser($updateUserObj);
+		
+		//flash it and send it the pageId to the index to be loaded
+		$this->session->set_flashdata('selectedPageId', $pageId);
+		//send it back to the top
+		redirect('site/index');
 	}
 	
 	function logout(){
