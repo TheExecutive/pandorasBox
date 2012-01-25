@@ -772,7 +772,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 
 #controlBar ul {
 	min-width: 230px;
-	margin: 0 0 0 660px;
+	margin: 0 0 0 650px;
 	height: 30px;
 }
 
@@ -784,24 +784,120 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	font-size: 0.8em;
 }
 
-#searchResultsWrapper, #latestActivityWrapperMain {
+#controlBar .controlBarButton {
+	text-transform: lowercase;
+	text-decoration: none;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.8em;
+	color: #ffffff;
+	margin: 2px;
+	display: block;
+	padding: 10px;
+	width: 113px;
+	background: -moz-linear-gradient(
+		top,
+		#679cb5 0%,
+		#2b7b8f);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#679cb5),
+		to(#2b7b8f));
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border: 1px solid #358ba1;
+	-moz-box-shadow:
+		0px 1px 1px rgba(061,061,061,0.5),
+		inset 0px 1px 0px rgba(159,195,204,1);
+	-webkit-box-shadow:
+		0px 1px 1px rgba(061,061,061,0.5),
+		inset 0px 1px 0px rgba(159,195,204,1);
+	text-shadow:
+		0px -2px 1px rgba(052,126,145,1),
+		0px 0px 0px rgba(255,255,255,0);
+
+}
+
+#searchResultsWrapper {
 	width: 940px;
 	margin: 10px 0 0 10px;
 }
 
-#searchResultsWrapper h3, #latestActivityWrapperMain h3 {
+#latestActivityWrapperMain {
+	float: right;
+	width: 300px;
+	margin: 10px 0 0 10px;
+}
+
+#searchResultsWrapper h3 {
 	text-transform: uppercase;
 	font: 2.4em "Arial Black", Arial, sans-serif;
 	color: #c6c6c6;
 	text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
-	
 }
 
-.searchResultsPanel, .latestActivityPanelMain {
+#latestActivityWrapperMain h3 {
+	text-transform: uppercase;
+	font: 2.4em "Arial Black", Arial, sans-serif;
+	color: #000000;
+}
+
+#pageMainContentWrapper {
+	width: 940px;
+	margin: 10px 0 0 10px;
+}
+
+#pageMainContent {
+	min-height: 444px;
+	width: 900px;
+	padding: 20px;
+	font-size: 2.4em;
+	color: #222;
+	background-color: #fff;
+	-webkit-border-radius: 10px; 
+     -moz-border-radius: 10px; 
+          border-radius: 10px;
+          -webkit-box-shadow: 1px 1px 2px #000;
+     -moz-box-shadow: 1px 1px 2px #000;
+          box-shadow: 1px 1px 2px #000; 
+}
+
+#pageMainContent p {
+	padding: 10px;
+	line-height: 1.3em;
+}
+
+#pageMainContent h2 {
+	font-size: 2em;
+	font-weight: bold;
+	border-bottom: 1px solid #444;
+	color: #A70000;
+}
+
+.searchResultsPanel {
 	min-height: 100px;
 	width: 900px;
 	padding: 20px;
-	background-color: #392b3a;
+	background-color: #000;
+	-webkit-border-radius: 10px; 
+     -moz-border-radius: 10px; 
+          border-radius: 10px;
+          -webkit-box-shadow: 1px 1px 2px #000;
+     -moz-box-shadow: 1px 1px 2px #000;
+          box-shadow: 1px 1px 2px #000; 
+}
+
+.latestActivityPanelMain {
+	padding: 20px;
+background: #7e1a8c;
+background: -moz-radial-gradient(center, ellipse cover, #7e1a8c 0%, #43115b 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#7e1a8c), color-stop(100%,#43115b));
+background: -webkit-radial-gradient(center, ellipse cover, #7e1a8c 0%,#43115b 100%);
+background: -o-radial-gradient(center, ellipse cover, #7e1a8c 0%,#43115b 100%);
+background: -ms-radial-gradient(center, ellipse cover, #7e1a8c 0%,#43115b 100%);
+background: radial-gradient(center, ellipse cover, #7e1a8c 0%,#43115b 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e1a8c', endColorstr='#43115b',GradientType=1 );
 	-webkit-border-radius: 10px; 
      -moz-border-radius: 10px; 
           border-radius: 10px;

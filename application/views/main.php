@@ -31,8 +31,8 @@
 					<div id="controlBar">
 						<p class="loggedInAs">Welcome! You're logged in as "<strong><?php echo $currentUser->username; ?></strong>",  <span class="loggedSmaller">a rank <strong><?php echo $currentUser->rankId; ?></strong> account.</span></p>
 						<ul>
-							<li><button type="button" class="controlBarButton">&gt; Create New Page</button></li>
-							<li><button type="button" class="controlBarButton">&gt; Edit This Page</button></li>
+							<li><?php echo anchor('site/newpage', '&gt; Create New Page' , array('class' => 'controlBarButton'));?></li>
+							<li><?php echo anchor('site/editpage', '&gt; Edit This Page' , array('class' => 'controlBarButton'));?></li>
 						</ul>
 					</div><!--end controlBar-->
 				<?php endif; ?>
@@ -62,9 +62,16 @@
 								</div><!--end activity entry -->
 							<?php endforeach;?>
 							
-							
 						</div><!--end latestActivityPanelMain-->
+						
 					</div><!--end latestActivityWrapperMain-->
+					
+					<div id="pageMainContentWrapper">
+						<div id="pageMainContent">
+							<h2><?php echo $pageData->pageName; ?></h2>
+							<?php echo $pageData->pageContent; ?>
+						</div><!--end pageMainContent-->
+					</div><!--end pageMainContentWrapper -->
 				
 			</div><!--end upper third content -->
 			</div><!--end upperThirdWrapper-->

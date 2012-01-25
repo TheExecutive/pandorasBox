@@ -39,7 +39,7 @@ class Site extends CI_Controller {
 		};
 		
 		//save the pageId in the session to a variable
-		$pageIdFlash = $this->session->flashdata('clickedPageId');
+		$pageIdFlash = $this->session->flashdata('selectedPageId');
 		
 		if(isset($pageIdFlash) && $pageIdFlash != false ){
 			//if there is a number in the session
@@ -83,6 +83,10 @@ class Site extends CI_Controller {
 		//var_dump($newCommentObject);
 		
 		$this->Comments->postNewComment($newCommentObject);
+		
+		//flash the page I'm on and send it to the index
+		$this->session->set_flashdata('selectedPageId', $newCommentObject['pageId']);
+		
 		redirect('site/index');
 	}
 	
@@ -115,8 +119,37 @@ class Site extends CI_Controller {
 		$pageId = $this->uri->segment(3);
 		
 		//flash the clicked page in session
-		$this->session->set_flashdata('clickedPageId', $pageId);
+		$this->session->set_flashdata('selectedPageId', $pageId);
 		//and finally, redirect
+		redirect('site/index');
+	}
+	
+	function newPage(){
+		//this function will run to pull up the view for creating a new form.
+		$data['pageTitle'] = 'pandorasBox - Create New Page';
+		$data['panelContainer'] = 'incs/panelcontainer';
+		$data['currentUser'] = $this->session->userdata('currentUser');
+		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+		$this->load->view('newpage', $data);
+	}
+	
+	function newPageSubmit(){
+		$currentUser = $this->session->userdata('currentUser');
+		//creating a new page object
+		$newPageObj = array(
+			'pageName' => $this->input->post('newpage_pagetitle'),
+			'pageContent' => $this->input->post('newpage_pagecontent'),
+			'userId' => $currentUser->userId
+		);
+		
+		//passing it to the function in pages
+		$this->Pages->newPage($newPageObj);
+		//get the page back out so it can be loaded
+		$pageJustMade = $this->Pages->getPageByName($newPageObj['pageName']); //COME BACK AND VALIDATE THIS SO IT'S UNIQUE LATER
+		
+		//flash it and send it to the index
+		$this->session->set_flashdata('selectedPageId', $pageJustMade->pageId);
+		//send it back to the top
 		redirect('site/index');
 	}
 	

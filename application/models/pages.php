@@ -22,12 +22,19 @@ class Pages extends CI_Model {
 		//3 actions, Created, Edited, Comment Posted
 		$this->load->helper('date');
 		$datestring = "%Y-%m-%d %H:%i:%s";
+		$formattedDate = mdate($datestring, time());
 		
-		$this->pageId = $pageId;
+		//for some reason 'this' goes haywire here so I have to do it the old fashioned way
+		$this->db->query(
+			"insert into activity (pageId, userId, actionTaken, timeOfAction)". 
+			"values(".
+			$this->db->escape($pageId).", ".$this->db->escape($userId).", ".$this->db->escape($actionTaken).", ".$this->db->escape($formattedDate).")"
+		);
+		/*$this->pageId = $pageId;
 		$this->userId = $userId;
 		$this->actionTaken = $actionTaken;
 		$this->timeOfAction = mdate($datestring, time());
-		$this->db->insert('activity', $this);
+		$this->db->insert('activity', $this);*/
 	}
 	
 	function getAllPages() {
@@ -91,6 +98,7 @@ class Pages extends CI_Model {
 		//adding to activity log
 		//getting PageId
 		$pageResult = $this->getPageByName($pageObject['pageName']);
+		
 		$this->updateActivityLog($pageResult->pageId, $pageObject['userId'], 'Created');
 	}
 	
