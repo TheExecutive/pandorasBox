@@ -48,6 +48,8 @@ class Comments extends CI_Model {
 		$this->Tracker->addExperience($newCommentObject['userId']);
 		//adding to postcount
 		$this->Tracker->addPostCount($newCommentObject['userId']);
+		//adding to activity log
+		$this->updateActivityLog($newCommentObject['pageId'], $newCommentObject['userId'], 'Comment posted');
 	}
 	
 	function updateComment($updateCommentObject) {

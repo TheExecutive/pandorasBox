@@ -17,6 +17,18 @@ class Pages extends CI_Model {
 		return $query->result();
 	}
 	
+	function updateActivityLog($pageId, $userId, $actionTaken){
+		//3 actions, Created, Edited, Comment Posted
+		$this->load->helper('date');
+		$datestring = "%Y-%m-%d %H:%i:%s";
+		
+		$this->pageId = $pageId;
+		$this->userId = $userId;
+		$this->actionTaken = $actionTaken;
+		$this->timeOfAction = mdate($datestring, time());
+		$this->db->insert('pages', $this);
+	}
+	
 	function getAllPages() {
 		//tested and working
 		$query = $this->db->get('pages');
@@ -26,18 +38,19 @@ class Pages extends CI_Model {
 	function getPageById($pageId) {
 		//tested and working
 		$query = $this->db->get_where('pages', array('pageId' => $pageId));
-		return $query->result();
+		return $query->row();
 	}
 	
 	function getPageByName($pageName) {
 		//tested and working
 		$query = $this->db->get_where('pages', array('pageName' => $pageName));
-		return $query->result();
+		return $query->row();
 	}
 	
 	function getPageCommentsByPageId($pageId, $isAscending = false){
 		//tested and working
 		//pass true after the Id to get the comments earliest first instead of latest first
+		$this->db->join('users', 'users.userId = comments.userId');
 		$this->db->join('pages', 'pages.pageId = comments.pageId');
 		$this->db->order_by('commentDate', ($isAscending == true ? 'asc' : 'desc'));
 		$query = $this->db->get_where('comments', array('pages.pageId' => $pageId));
@@ -73,6 +86,11 @@ class Pages extends CI_Model {
 		$this->Tracker->addExperience($pageObject['userId']);
 		//adding to page creation count
 		$this->Tracker->addPageCreationCount($pageObject['userId']);
+		
+		//adding to activity log
+		//getting PageId
+		$pageResult = $this->getPageByName($pageObject['pageName']);
+		$this->updateActivityLog($pageResult->pageId, $pageObject['userId'], 'Created');
 	}
 	
 	function updatePage($updatePageObject) {
@@ -106,6 +124,8 @@ class Pages extends CI_Model {
 		$this->Tracker->addExperience($updatePageObject['userId']);
 		//adding to page edit count
 		$this->Tracker->addPageEditCount($updatePageObject['userId']);
+		//adding to activity log
+		$this->updateActivityLog($updatePageObject['pageId'], $updatePageObject['userId'], 'Edited');
 	}
 	
 	function searchPages($searchedTerm) {

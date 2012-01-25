@@ -1,45 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<head>
-		<title>pandorasBox - Easy-to-use, simple documentation for the Coldbox Coldfusion framework.</title>
-			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<!--Begin Metas for Accessibility-->
-			<meta name="keywords" content="pandorasBox, Coldfusion, Coldbox, Framework, Documentation, Easy, Simple, Tutorials" />
-			<meta name="description" content="pandorasBox is simple, easy to use documenation for beignners of the Coldbox Coldfusion framework." />
-			<!--End Metas for Accessibility-->
-			
-			<!--CSS here -->
-			<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />
-	</head>	
+	<?php $this->load->view('incs/header'); ?>
 	<body>
 		<div id="wrapper">
-			<div id="panelContainer">
-			
-				<div id="loginPanel">
-					<form method="post" action="#">
-					<fieldset>
-					<label for="login_userName">Username</label>
-					<input type="text" id="login_userName" class="loginForm" />
-					<label for="login_password">Password</label>
-					<input type="password" id="login_password" name="password" class="loginForm" />
-					<a href="#">Forgot your password?</a>
-					</fieldset>
-					<a href="#" class="cancelLink">Cancel</a>
-					<button type="button" class="signInButton buttondisabled">Sign In</button>
-					</form>
-				</div><!-- end login panel-->
-			
-				<div class="errorTooltip">
-					<div class="errorTooltip-body">Oops! That username or password doesn't match any in our database.</div>
-					<div class="errorTooltip-tip"></div>
-				</div><!--End ErrorTooltip -->
-			 </div><!-- end panelContainer -->
+			<?php $this->load->view($panelContainer); ?>
 				 
 			<div id="upperThirdWrapper" class="clearfix">
 			<div id="headerWrapper">
 				<div id="header">
-					<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
-					<a href="#" id="accountLink"><span class="highlight">&gt;</span>awesomeCoder</a>
+					
+					<?php if(!isset($is_logged_in) || $is_logged_in == false): ?>
+						<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
+						<a href="#" id="loginLink"><span class="highlight">&gt;</span> Login</a>
+					<?php else: ?>
+						<a href="#" id="loginLink"><span class="highlight">&gt;</span> <?php echo $currentUser->username; ?></a>
+					<?php endif; ?>
 					
 					<div id="searchWrapper">
 						<form method="post" action="#">
@@ -51,14 +26,21 @@
 				</div><!--End Header DIV-->
 			</div><!-- end headerwrapper-->
 			<div id="upperThirdContent">
-				<h2 class="controlBarHeader">Control Bar</h2>
-				<div id="controlBar">
-					<p class="loggedInAs">logged in as <strong>awesomeCoder</strong>, <span class="loggedSmaller">a rank <strong>6</strong> account.</span></p>
-					<ul>
-						<li><button type="button" class="controlBarButton">&gt; Create New Page</button></li>
-						<li><button type="button" class="controlBarButton">&gt; Edit This Page</button></li>
-					</ul>
-				</div><!--end sidepanel-->
+				<?php if(!isset($is_logged_in) || $is_logged_in == false): ?>
+					<h2 class="controlBarHeader">Control Bar</h2>
+					<div id="controlBar">
+						<p class="loggedInAs">Welcome, <strong>Guest!</strong> This is the Control Bar. Sign up to see all the cool things you can do with it!</p>
+					</div><!--end controlBar-->
+				<?php else: ?>
+					<h2 class="controlBarHeader">Control Bar</h2>
+					<div id="controlBar">
+						<p class="loggedInAs">Welcome! You're logged in as "<strong><?php echo $currentUser->username; ?></strong>",  <span class="loggedSmaller">a rank <strong><?php echo $currentUser->rankId; ?></strong> account.</span></p>
+						<ul>
+							<li><button type="button" class="controlBarButton">&gt; Create New Page</button></li>
+							<li><button type="button" class="controlBarButton">&gt; Edit This Page</button></li>
+						</ul>
+					</div><!--end controlBar-->
+				<?php endif; ?>
 				
 				<div id="searchResultsWrapper">
 						<h3>Search Results</h3>
@@ -79,16 +61,15 @@
 						<h3>Latest Activity</h3>
 						<div class="latestActivityPanelMain">
 							
-							<div class="activityEntryMain">
-								<p><a href="#" class="actTitleMain">ORM</a><span class="actData"> - Created on 1/22/2012</span></p>
-							</div><!--end activity entry -->
+							<?php foreach ($returnedActs as $act): ?>
+								<div class="activityEntryMain">
+									<p><a href="#" class="actTitleMain"><?php echo $act->pageName; ?></a><span class="actData"> - <?php echo $act->actionTaken; ?> by <?php echo $act->username; ?></span></p>
+								</div><!--end activity entry -->
+							<?php endforeach;?>
 							
-							<div class="activityEntryMain">
-								<p><a href="#" class="actTitleMain">ORM</a><span class="actData"> - Created on 1/22/2012</span></p>
-							</div><!--end activity entry -->
 							
-						</div><!--end searchResultsPanel-->
-					</div><!--end searchResultsWrapper-->
+						</div><!--end latestActivityPanelMain-->
+					</div><!--end latestActivityWrapperMain-->
 				
 			</div><!--end upper third content -->
 			</div><!--end upperThirdWrapper-->
@@ -109,30 +90,13 @@
 						
 						<div id="commentArea">
 							
-							<div class="commentAreaPost">
-								<div class="commentProfilePic"><img src="img/testimage.gif" alt="The Executive's Profile Pic" /></div><!-- end profile pic-->
-								<h4><span class="posterName">TheExecutive</span><span class="postedDate">posted 12/1/2012 - 12:22:23</span></h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							</div><!--end commentAreaPost -->
-							
-							<div class="commentAreaPost">
-								<div class="commentProfilePic"><img src="img/testimage.gif" alt="The Executive's Profile Pic" /></div><!-- end profile pic-->
-								<h4><span class="posterName">TheExecutive</span> <span class="postedDate">posted 12/1/2012 - 12:22:23</span></h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							</div><!--end commentAreaPost -->
-							
-							<div class="commentAreaPost">
-								<div class="commentProfilePic"><img src="img/testimage.gif" alt="The Executive's Profile Pic" /></div><!-- end profile pic-->
-								<h4><span class="posterName">TheExecutive</span> <span class="postedDate">posted 12/1/2012 - 12:22:23</span></h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							</div><!--end commentAreaPost -->
-							
-							<div class="commentAreaPost">
-								<div class="commentProfilePic"><img src="img/testimage.gif" alt="The Executive's Profile Pic" /></div><!-- end profile pic-->
-								<h4><span class="posterName">TheExecutive</span> <span class="postedDate">posted 12/1/2012 - 12:22:23</span></h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							</div><!--end commentAreaPost -->
-
+							<?php foreach ($pageComments as $comment): ?>
+								<div class="commentAreaPost">
+									<div class="commentProfilePic"><img src="img/testimage.gif" alt="Profile Pic" /></div><!-- end profile pic-->
+									<h4><span class="posterName"><?php echo $comment->username; ?></span><span class="postedDate">posted <?php echo $comment->commentDate; ?></span></h4>
+									<p><?php echo $comment->commentContent; ?></p>
+								</div><!--end commentAreaPost -->
+							<?php endforeach;?>
 							
 						</div><!--end comment Area-->
 						
@@ -140,16 +104,10 @@
 					
 			</div><!--end lowerThirdWrapper-->
 				
-			<div id="footer" class="clearfix">
-				<div id="footerLogo">FooterLogo</div>
-				<p>design, code and awesomeness by Troy Grant</p>
-				<p>Individual Project - ASL1201</p>
-			</div><!--End Footer DIV-->
+			<?php $this->load->view('incs/footer'); ?>
 		</div><!--End Wrapper DIV-->
 		
 	<!--JS here - If no JS, remove this -->
-	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
-	<script type="text/javascript" src="js/si.files.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	<?php $this->load->view('incs/javascriptfiles'); ?>
 	</body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
-		<title>pandorasBox - Easy-to-use, simple documentation for the Coldbox Coldfusion framework.</title>
+		<title><?php echo $pageTitle; ?></title>
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 			<!--Begin Metas for Accessibility-->
 			<meta name="keywords" content="pandorasBox, Coldfusion, Coldbox, Framework, Documentation, Easy, Simple, Tutorials" />

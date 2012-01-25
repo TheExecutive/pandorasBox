@@ -1,17 +1,20 @@
 <div id="panelContainer">
 			
 	<div id="loginPanel">
-		<?php echo form_open('main/login');?>
-		<fieldset>
-		<label for="login_userName">Username</label>
-		<input type="text" id="login_username" name="login_username"  class="loginForm" />
-		<label for="login_password">Password</label>
-		<input type="password" id="login_password" name="login_password" class="loginForm" />
-		<a href="#">Forgot your password?</a>
-		</fieldset>
-		<a href="#" class="cancelLink">Cancel</a>
-		<button type="submit" class="signInButton buttondisabled">Sign In</button>
-		</form>
+		<?php if(!isset($is_logged_in) || $is_logged_in == false): ?>
+			<?php echo form_open('main/login');?>
+			<fieldset>
+			<label for="login_userName">Username</label>
+			<input type="text" id="login_username" name="login_username"  class="loginForm" />
+			<label for="login_password">Password</label>
+			<input type="password" id="login_password" name="login_password" class="loginForm" />
+			<a href="#">Forgot your password?</a>
+			</fieldset>
+			<a href="#" class="cancelLink">Cancel</a>
+			<button type="submit" class="signInButton buttondisabled">Sign In</button>
+			</form>
+		<?php endif; ?>
+		
 	</div><!-- end login panel-->
 
 	<div class="errorTooltip">

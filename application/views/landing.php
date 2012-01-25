@@ -1,16 +1,6 @@
 <?php doctype('html5'); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<head>
-		<title>pandorasBox - Easy-to-use, simple documentation for the Coldbox Coldfusion framework.</title>
-			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<!--Begin Metas for Accessibility-->
-			<meta name="keywords" content="pandorasBox, Coldfusion, Coldbox, Framework, Documentation, Easy, Simple, Tutorials" />
-			<meta name="description" content="pandorasBox is simple, easy to use documenation for beignners of the Coldbox Coldfusion framework." />
-			<!--End Metas for Accessibility-->
-			
-			<!--CSS here -->
-			<?php echo link_tag('css/main.css');?>
-	</head>	
+	<?php $this->load->view('incs/header'); ?>
 	<body>
 		<div id="wrapper">
 			<?php echo validation_errors(); ?>
@@ -19,8 +9,13 @@
 			<div id="upperThirdWrapper" class="clearfix">
 			<div id="headerWrapper">
 				<div id="header">
-					<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
-					<a href="#" id="loginLink"><span class="highlight">&gt;</span> Login</a>
+					
+					<?php if(!isset($is_logged_in) || $is_logged_in == false): ?>
+						<!--<h1><span class="logopandora">pandoras</span><span class='logobox'>Box</span></h1>-->
+						<a href="#" id="loginLink"><span class="highlight">&gt;</span> Login</a>
+					<?php else: ?>
+						<a href="#" id="loginLink"><span class="highlight">&gt;</span> <?php $currentUser->username; ?></a>
+					<?php endif; ?>
 					
 					<div id="searchWrapper">
 						<?php echo form_open('main/search'); ?>

@@ -19,8 +19,10 @@ class Main extends CI_Controller {
 	function index() {
 		//index will always be the default function in a controller class.
 		//loading Pages model
+		$data['pageTitle'] = 'pandorasBox - Easy-to-use, simple documentation for the Coldbox Coldfusion framework.';
 		$data['panelContainer'] = 'incs/panelcontainer';
-		$data['returnedActs'] = $this->Pages->getLatestActivity(3);
+		$data['returnedActs'] = $this->Pages->getLatestActivity();
+		
 		$this->load->view('landing', $data);
 	}
 	
@@ -53,8 +55,9 @@ class Main extends CI_Controller {
 			//dumping the entire session into currentUser
 			$data['currentUser'] = $this->session->userdata('currentUser');
 			$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+			
 			//load the main page
-			$this->load->view('site/main', $data);
+			redirect('site/index');
 		}
 	}
 	
