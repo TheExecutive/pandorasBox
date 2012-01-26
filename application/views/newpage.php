@@ -24,7 +24,7 @@
 						<p class="loggedInAs">Welcome! You're logged in as "<strong><?php echo $currentUser->username; ?></strong>",  <span class="loggedSmaller">a rank <strong><?php echo $currentUser->rankId; ?></strong> account.</span></p>
 						<ul>
 							<li><?php echo form_submit(array('class' => 'controlBarButton', 'name' => 'newpagesubmit', 'value' => '> Save Page')); ?></li>
-							<li><?php echo anchor('site/cancelnewpage', '&gt; Cancel' , array('class' => 'controlBarButton'));?></li>
+							<li><?php echo anchor('site/cancelnewpage/'.$pageData->pageId, '&gt; Cancel' , array('class' => 'controlBarButton'));?></li>
 						</ul>
 					</div><!--end controlBar-->
 					

@@ -99,9 +99,7 @@ class Main extends CI_Controller {
 			//rock on
 			//begin upload process
 			$uploadData = $this->Users->uploadAvatar('signup_avatar');
-			if($uploadData != false){
-				//if an avatar has been selected
-				
+			if($uploadData['upload_data']['file_name'] != ''){
 				//grabbing the username really quick just to make a name for the file
 				$usernameForFile = $this->input->post('signup_username');
 				//loading image manipulation
@@ -126,16 +124,12 @@ class Main extends CI_Controller {
 					'avatar' => '',
 					'avatarSmall' => ''
 				);
-				
 			};
-			
 			//after all that's done
 			//send it to the newUser function in models
 			$this->Users->newUser($newUserObject);
-			
 			//get the new user back out again by using the getUserByUsername function
 			$loggedInUserData = $this->Users->getUserByUsername($newUserObject['username']);
-			
 			//saving the user data returned into a variable called
 			//currentUser, and setting it to a session variable
 			$currentUser = $loggedInUserData;
@@ -152,7 +146,6 @@ class Main extends CI_Controller {
 			//load the main page
 			redirect('site/index');
 		};
-		
 	}
 
 	function checkLoggedInIndex(){

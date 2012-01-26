@@ -40,7 +40,7 @@ class Site extends CI_Controller {
 		
 		//save the pageId in the session to a variable
 		$pageIdFlash = $this->session->flashdata('selectedPageId');
-		
+		//echo $pageIdFlash;
 		if(isset($pageIdFlash) && $pageIdFlash != false ){
 			//if there is a number in the session
 			$data['pageData'] = $this->Pages->getPageById($pageIdFlash);
@@ -79,7 +79,10 @@ class Site extends CI_Controller {
 		
 		if($this->form_validation->run() == false){
 			//CI will show the errors and redirect back to the index
-			$this->index();
+			$pageId = $this->uri->segment(3);
+			$this->session->set_flashdata('selectedPageId', $pageId);
+			//validation won't pop up unless I use $this->index()
+			redirect('site/index');
 		}else{
 			$currentUser = $this->session->userdata('currentUser');
 			//creating comment object
@@ -107,7 +110,6 @@ class Site extends CI_Controller {
 	function search(){
 		//validation for search
 		///valiation
-		
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="serverSideValidation">', '</div>');
 		//validation
@@ -124,7 +126,6 @@ class Site extends CI_Controller {
 		//server request, then it is autodeleted.
 		$this->session->set_flashdata('searchResults', $searchResults);
 		redirect('site/index');
-		echo 'this is running';
 	}
 	
 	function page(){
@@ -148,14 +149,26 @@ class Site extends CI_Controller {
 		$data['panelContainer'] = 'incs/panelcontainer';
 		$data['currentUser'] = $this->session->userdata('currentUser');
 		$data['is_logged_in'] = $this->session->userdata('is_logged_in');
+		//saving the page I was on just in case I want to cancel
+		$data['pageData'] = $this->Pages->getPageById($this->uri->segment(3));
 		$this->load->view('newpage', $data);
 	}
 	
 	function cancelNewPage(){
+		$pageId = $this->uri->segment(3);
+		
+		//flash the clicked page in session
+		$this->session->set_flashdata('selectedPageId', $pageId);
+		//and finally, redirect
 		redirect('site/index');
 	}
 	
 	function cancelEditPage(){
+		$pageId = $this->uri->segment(3);
+		
+		//flash the clicked page in session
+		$this->session->set_flashdata('selectedPageId', $pageId);
+		//and finally, redirect
 		redirect('site/index');
 	}
 	
@@ -268,7 +281,6 @@ class Site extends CI_Controller {
 	function editDescriptionSubmit(){
 		//this page is protected, so check if logged in or not
 		$this->checkLoggedIn();
-		
 		$currentUser = $this->session->userdata('currentUser');
 		//creating a update page object
 		$pageId = $this->uri->segment(3);
