@@ -241,7 +241,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 
 #loginPanel {
 	width: 250px;
-	height: 224px;
+	min-height: 120px;
 	position: absolute;
 	z-index: 3;
 	background-color: rgba(0,0,0,0.8);
@@ -550,6 +550,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 	height: 206px;
 	width: 300px;
 	padding: 20px;
+	overflow: hidden;
 	background: #392b3a url("../img/spritespandora.png") no-repeat;
 	background-position: 90px -370px;
 	-webkit-border-radius: 10px; 
@@ -558,6 +559,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
           -webkit-box-shadow: 1px 1px 2px #000;
      -moz-box-shadow: 1px 1px 2px #000;
           box-shadow: 1px 1px 2px #000; 
+}
+
+.latestActivityPanel .activityEntryMain {
+	margin-top: -6px;
+	padding: 5px;
 }
 
 .activityEntry p {
@@ -842,6 +848,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', end
 		0px -2px 1px rgba(052,126,145,1),
 		0px 0px 0px rgba(255,255,255,0);
 
+}
+
+#controlBar .controlBarButton.notLoggedIn{
+	margin: 2px 2px 2px 62px;
 }
 
 #searchResultsWrapper {
@@ -1404,4 +1414,55 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e1a8c', end
 	text-align: center;
 	color: #c2c2c2;
 	font: 1.4em/1.2 "Arial Black", Arial, sans-serif; /*10 pt*/
+}
+
+/*--------------------------------------------------------*/
+
+#error_msg {
+background:#FBE6F2 none repeat scroll 0 0;
+border:1px solid #D893A1;
+}
+#notice_msg {
+background:#EFF8D9 none repeat scroll 0 0;
+border:1px solid #B4E04B;
+}
+#error_msg, #notice_msg {
+color:#333333;
+padding: 10px;
+min-height: 48px;
+overflow: auto; /* need to clear float */
+margin-bottom:15px;
+}
+
+
+#error_msg p, #notice_msg p {
+font-size: 1.4em;
+margin-bottom:5px;
+}
+
+#error_msg img, #notice_msg img {
+float:left;
+}
+
+#error_msg_container, #notice_msg_container {
+float:left;
+margin-left:10px;
+}
+
+.message {
+	font: 2em Arial, Helvetica, sans-serif;
+	color: #fff;
+	padding: 5px;
+	  -webkit-box-shadow: 1px 1px 2px #000;
+     -moz-box-shadow: 1px 1px 2px #000;
+          box-shadow: 1px 1px 2px #000; 
+	text-shadow: 1px 1px 1px #000;
+background: #e73827;
+background: -moz-linear-gradient(45deg, #e73827 0%, #f02f17 29%, #f6290c 40%, #f16f5c 80%, #f85032 100%);
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#e73827), color-stop(29%,#f02f17), color-stop(40%,#f6290c), color-stop(80%,#f16f5c), color-stop(100%,#f85032));
+background: -webkit-linear-gradient(45deg, #e73827 0%,#f02f17 29%,#f6290c 40%,#f16f5c 80%,#f85032 100%);
+background: -o-linear-gradient(45deg, #e73827 0%,#f02f17 29%,#f6290c 40%,#f16f5c 80%,#f85032 100%);
+background: -ms-linear-gradient(45deg, #e73827 0%,#f02f17 29%,#f6290c 40%,#f16f5c 80%,#f85032 100%);
+background: linear-gradient(45deg, #e73827 0%,#f02f17 29%,#f6290c 40%,#f16f5c 80%,#f85032 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e73827', endColorstr='#f85032',GradientType=1 );
 }

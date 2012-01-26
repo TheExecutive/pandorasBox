@@ -8,7 +8,7 @@ class Main extends CI_Controller {
 		
 		//start session
 		$this->load->library('session');
-		
+		$this->load->library('message');
 		
 		//form helper, and url helper
 		$this->load->helper(array('form', 'url', 'html'));
@@ -40,7 +40,7 @@ class Main extends CI_Controller {
 		
 		$data['pageTitle'] = 'pandorasBox - Easy-to-use, simple documentation for the Coldbox Coldfusion framework.';
 		$data['panelContainer'] = 'incs/panelcontainer';
-		$data['returnedActs'] = $this->Pages->getLatestActivity();
+		$data['returnedActs'] = $this->Pages->getLatestActivity(6);
 		
 		$this->load->view('landing', $data);
 	}
@@ -56,7 +56,8 @@ class Main extends CI_Controller {
 		//if there is no user by that Username and pass it will return false
 		
 		if($loggedInUserData == false){
-			echo 'bad user';
+			$this->message->set('message','Oops! Either the username or password you entered is incorrect.');
+			redirect('main/index');
 		}else{
 			//start session
 			$this->load->library('session');

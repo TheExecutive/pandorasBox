@@ -3,9 +3,10 @@
 	<?php $this->load->view('incs/header');?>
 	<body>
 		<div id="wrapper">
+			<?php echo $this->message->display(); ?>
 			<?php echo validation_errors();?>
 			<?php $this->load->view($panelContainer);?>
-				 
+			
 			<div id="upperThirdWrapper" class="clearfix">
 			<div id="headerWrapper">
 				<div id="header">

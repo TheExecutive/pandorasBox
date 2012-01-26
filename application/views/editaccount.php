@@ -19,11 +19,12 @@
 			<div id="upperThirdContent">
 				<h2 class="accountTitle"><?php echo $currentUser->username ?>'s account</h2>
 					<h2 class="controlBarHeader">Control Bar</h2>
+					<?php echo form_open('site/editDescriptionSubmit/'.$pageData->pageId, array('class' => 'newPageForm')); ?>
 					<div id="controlBar">
 						<p class="loggedInAs">Welcome! You're logged in as "<strong><?php echo $currentUser->username; ?></strong>",  <span class="loggedSmaller">a rank <strong><?php echo $currentUser->rankId; ?></strong> account.</span></p>
 						<ul>
-							<li><?php echo anchor('site/editAccount/'.$pageData->pageId, '&gt; Edit Description' , array('class' => 'controlBarButton'));?></li>
-							<li><?php echo anchor('site/page/'.$pageData->pageId, '&gt; Back' , array('class' => 'controlBarButton'));?></li>
+							<li><?php echo form_submit(array('class' => 'controlBarButton', 'name' => 'editdescrip_submit', 'value' => '> Save Changes')); ?></li>
+							<li><?php echo anchor('site/account/'.$pageData->pageId, '&gt; Cancel' , array('class' => 'controlBarButton'));?></li>
 						</ul>
 					</div><!--end controlBar-->
 				<!--<div id="accountSidePanel">
@@ -43,10 +44,11 @@
 					<div id="accountMainInfo">
 						<?php echo img(array('src' => $currentUserRankInfo->avatar, 'id' => 'accountAvatarPhoto', 'alt' => $currentUserRankInfo->username."'s avatar photo"))?>
 						<h3 class="accountName"><?php echo $currentUserRankInfo->username ?></h3>
-						<p class="accountDescrip"><?php echo $currentUserRankInfo->description ?></p>
+						<p class="accountDescrip"><textarea name="editaccount_description" cols="40" rows="10" id="editaccount_description" ><?php echo $currentUserRankInfo->description; ?></textarea></p>
 					</div><!-- end account main info -->
 					
 				</div><!-- end accountMainPanel-->
+			</form>
 			</div><!--end upper third content -->
 			</div><!--end upperThirdWrapper-->
 			

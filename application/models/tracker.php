@@ -174,8 +174,8 @@ class Tracker extends CI_Model {
 		//Customado will be awarded on the first edit, no need to check for it.
 		
 		//checking for Mona Lisa
-		if($usersQuery->pageCreationCount >= 5 && $achieveBooleanArray['has_MonaLisa'] == false) {
-			//if the pageEditCount is greater than or equal to 5
+		if($usersQuery->pageCreationCount >= 1 && $achieveBooleanArray['has_MonaLisa'] == false) {
+			//if the pageEditCount is greater than or equal to 1
 			//and they don't have the achievement already
 			$this->awardAchievement($userId, 'Mona Lisa');
 		}

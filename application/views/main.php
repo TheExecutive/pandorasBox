@@ -25,6 +25,9 @@
 					<h2 class="controlBarHeader">Control Bar</h2>
 					<div id="controlBar">
 						<p class="loggedInAs">Welcome, <strong>Guest!</strong> This is the Control Bar. Sign up to see all the cool things you can do with it!</p>
+						<ul>
+							<li><?php echo anchor('main/index', '&gt; back to home' , array('class' => 'controlBarButton notLoggedIn'));?></li>
+						</ul>
 					</div><!--end controlBar-->
 				<?php else: ?>
 					<h2 class="controlBarHeader">Control Bar</h2>
